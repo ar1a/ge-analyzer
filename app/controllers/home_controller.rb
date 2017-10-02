@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
   def index
-    @items = Item.first(20).sample(3)
+    @items = Item.all.sample(5)
   end
 end
