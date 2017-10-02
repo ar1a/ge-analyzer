@@ -10,13 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171002114915) do
+ActiveRecord::Schema.define(version: 20171002203220) do
 
   create_table "items", force: :cascade do |t|
     t.integer "runescape_id"
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "icon"
   end
 
   create_table "price_updates", force: :cascade do |t|

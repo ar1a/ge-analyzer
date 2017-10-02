@@ -15,4 +15,6 @@
 //= require turbolinks
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
+//= require Chart.bundle
+//= require chartkick
 //= require_tree .

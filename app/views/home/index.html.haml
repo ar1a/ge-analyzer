@@ -1,32 +1,11 @@
--# %h1 henlo
-
--# - @items.in_groups_of(4) do |items|
--#   .row
--#     - items.each do |item|
--#       - next if item.nil?
--#       .col.s6.m3
--#         .card
--#           .card-content
--#             %span.card-title= item['name']
--#             %small= item['id']
--#             %span.right
--#               = number_to_currency(item['overall_average'], unit: 'gp', format: '%n %u', precision: 0)
-
-
 .row
   .col.s12.center
-    %h2 Dashboard
+    %h2 Homepage
 .row
+  - # TODO: Remove me
   .col.s12
     .card
       .card-content
         %span.card-title Random Items
         %ul.collapsible.popout{'data-collapsible': 'accordion'}
-          - @items.each do |item|
-            %li
-              .collapsible-header
-                %b= item['name']
-                %span.badge= number_to_currency(item['overall_average'], unit: 'gp', format: '%n %u', precision: 0)
-              .collapsible-body
-                %span
-                  TODO: Insert graph here
+          = render partial: 'preview', collection: @items, cached: true

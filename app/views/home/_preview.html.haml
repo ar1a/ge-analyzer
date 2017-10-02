@@ -1,0 +1,16 @@
+%li
+  .collapsible-header
+    = image_tag preview.icon_link, class: 'left img-responsive'
+    %b= preview.name
+    %span.badge= number_to_currency(preview.price, unit: 'gp', format: '%n %u', precision: 0)
+  .collapsible-body
+    %span
+      %b Buy price:
+      = number_to_currency(preview.buy_price, unit: 'gp', format: '%n %u', precision: 0)
+      %br
+      %b Sell price:
+      = number_to_currency(preview.sell_price, unit: 'gp', format: '%n %u', precision: 0)
+      %br
+      %a.btn.waves-effect.waves-light.light-green.darken-2{href: '#'}
+        %i.material-icons.right send
+        View Preview
