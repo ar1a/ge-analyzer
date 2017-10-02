@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  buy_average: 1
+  sell_average: 1
+  overall_average: 1
+
+two:
+  buy_average: 1
+  sell_average: 1
+  overall_average: 1

@@ -1,0 +1,2 @@
+class PriceUpdate < ApplicationRecord
+end
