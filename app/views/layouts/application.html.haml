@@ -8,9 +8,9 @@
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %nav
+    %nav.green.darken-2
       .nav-wrapper
-        %a.brand-logo.center{:href => "#"} Ge-Analyzer
+        %a.brand-logo.center{:href => root_path} Ge-Analyzer
         %a.button-collapse{"data-activates" => "mobilenav", :href => "#"}
           %i.material-icons menu
         %ul.right.hide-on-med-and-down

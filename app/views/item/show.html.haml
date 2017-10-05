@@ -1,0 +1,8 @@
+.row
+  .col.s12
+    .card
+      .card-content
+        %span.card-title.center= @item.name
+        .divider
+        = line_chart @item.price_history
+

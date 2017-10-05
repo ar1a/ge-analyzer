@@ -11,6 +11,9 @@
       %b Sell price:
       = number_to_currency(preview.sell_price, unit: 'gp', format: '%n %u', precision: 0)
       %br
-      %a.btn.waves-effect.waves-light.light-green.darken-2{href: '#'}
+      %b Margin:
+      = number_to_currency(preview.margin, unit: 'gp', format: '%n %u', precision: 0)
+      %br
+      %a.btn.waves-effect.waves-light.green.darken-2{href: item_path(preview.runescape_id)}
         %i.material-icons.right send
-        View Preview
+        View Item

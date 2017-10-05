@@ -28,12 +28,12 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Custom gems
 
+gem 'chartkick'
 gem 'devise', '~> 4.3'
 gem 'haml', '~> 5.0', '>= 5.0.3'
 gem 'haml-rails', '~> 1.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'materialize-sass', '~> 0.100.2'
+gem 'pry-rails'
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'whenever'
-gem 'pry-rails'
-gem 'chartkick'
