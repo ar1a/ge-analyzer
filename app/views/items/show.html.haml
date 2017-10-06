@@ -1,0 +1,18 @@
+.row
+  .col.s12
+    .card
+      .card-content
+        %span.card-title.center
+          = @item.name
+          = image_tag @item.icon_link, class: 'right img-responsive'
+      .card-tabs
+        %ul.tabs.tabs-fixed-width
+          %li.tab
+            %a{href: '#daily'} Today
+          %li.tab
+            %a{href: '#three'} Three days
+      .card-content
+        #daily
+          = line_chart daily_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+        #three
+          = line_chart daily_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }

@@ -15,6 +15,19 @@
 //= require turbolinks
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
-//= require Chart.bundle
 //= require chartkick
 //= require_tree .
+
+// Tab fix
+
+$(document).on('turbolinks:load', function() {
+    $('ul.tabs').tabs({
+        onShow: function() {
+            for (var key in Chartkick.charts) {
+                if(Chartkick.charts.hasOwnProperty(key)) {
+                    Chartkick.charts[key].redraw();
+                }
+            }
+        }
+    });
+});
