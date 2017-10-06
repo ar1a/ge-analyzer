@@ -35,10 +35,12 @@ class Item < ApplicationRecord
                   created_at: (DateTime.current - day_range.days)..DateTime.current
                 )
                 .pluck(:created_at, :overall_average)
-      if day_range < 7
+      if day_range < 3
         updates
+      elsif day_range >= 3 && day_range < 7
+        2.step(updates.size - 1, 3).map { |i| updates[i] }
       elsif day_range == 7
-        5.step(updates.size - 1, 6).map { |i| updates[i] } if day_range == 7
+        5.step(updates.size - 1, 6).map { |i| updates[i] }
       elsif day_range >= 30
         # averages each day
         a = price_updates.group_by{ |x| x.created_at.to_date }

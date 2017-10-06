@@ -26,13 +26,13 @@
               %a{href: '#daily'} Today
         .card-content
           #daily
-            = line_chart daily_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+            = line_chart daily_path(@item.runescape_id), label: 'Price', legend: true, height: '800px', min: nil, library: { pointSize: 0 }
           #three
-            = line_chart three_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+            = line_chart three_path(@item.runescape_id), label: 'Price', legend: true, height: '800px', min: nil, library: { pointSize: 0 }
           #week
-            = line_chart week_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+            = line_chart week_path(@item.runescape_id), label: 'Price', legend: true, height: '800px', min: nil, library: { pointSize: 0 }
           #month
-            = line_chart month_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { pointSize: 0 }
+            = line_chart month_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0 }, legend: true
         - unless @item.timed_out?
           .card-action
             -# = link_to 'Refresh', refresh_path(@item.runescape_id)
