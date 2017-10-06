@@ -26,3 +26,4 @@
 config/database.yml
 config/secrets.yml
 bin/*
+/lib/capistrano/tasks/logs.cap
