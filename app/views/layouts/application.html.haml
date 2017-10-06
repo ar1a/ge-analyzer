@@ -9,14 +9,16 @@
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %nav.green.darken-2
-      .nav-wrapper
-        %a.brand-logo.center{:href => root_path} Ge-Analyzer
-        %a.button-collapse{"data-activates" => "mobilenav", :href => "#"}
-          %i.material-icons menu
-        %ul.right.hide-on-med-and-down
-          = render 'navbar'
-        %ul#mobilenav.side-nav
-          = render 'navbar'
-    .container
-      = yield
+    - flash.each do |type, message|
+      = javascript_tag "Materialize.toast('#{message}', 4000)"
+  %nav.green.darken-2
+    .nav-wrapper
+      %a.brand-logo.center{:href => root_path} Ge-Analyzer
+      %a.button-collapse{"data-activates" => "mobilenav", :href => "#"}
+        %i.material-icons menu
+      %ul.right.hide-on-med-and-down
+        = render 'navbar'
+      %ul#mobilenav.side-nav
+        = render 'navbar'
+  .container
+    = yield

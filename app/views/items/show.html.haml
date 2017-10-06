@@ -1,18 +1,39 @@
-.row
-  .col.s12
-    .card
-      .card-content
-        %span.card-title.center
-          = @item.name
-          = image_tag @item.icon_link, class: 'right img-responsive'
-      .card-tabs
-        %ul.tabs.tabs-fixed-width
-          %li.tab
-            %a{href: '#daily'} Today
-          %li.tab
-            %a{href: '#three'} Three days
-      .card-content
-        #daily
-          = line_chart daily_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
-        #three
-          = line_chart daily_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+- cache @item do
+  .row
+    .col.s12
+      .card
+        .card-content
+          %span.card-title.center
+            = @item.name
+            = image_tag @item.icon_link, class: 'right img-responsive'
+          %b Buy price:
+          = number_to_currency(@item.buy_price, unit: 'gp', format: '%n %u', precision: 0)
+          %br
+          %b Sell price:
+          = number_to_currency(@item.sell_price, unit: 'gp', format: '%n %u', precision: 0)
+          %br
+          %b Margin:
+          = number_to_currency(@item.margin, unit: 'gp', format: '%n %u', precision: 0)
+        .card-tabs
+          %ul.tabs
+            %li.tab
+              %a.active{href: '#month'} Month
+            %li.tab
+              %a{href: '#week'} Week
+            %li.tab
+              %a{href: '#three'} Three days
+            %li.tab
+              %a{href: '#daily'} Today
+        .card-content
+          #daily
+            = line_chart daily_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+          #three
+            = line_chart three_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+          #week
+            = line_chart week_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { trendlines: { '0' => { color: 'green', opacity: 0.2, pointsVisible: false, lineWidth: 5 } }, pointSize: 2, curveType: 'none' }
+          #month
+            = line_chart month_path(@item.runescape_id), label: 'Price', legend: false, height: '800px', min: nil, library: { pointSize: 0 }
+        - unless @item.timed_out?
+          .card-action
+            -# = link_to 'Refresh', refresh_path(@item.runescape_id)
+            %a.tooltipped{href: refresh_path(@item.runescape_id), 'data-position' => 'top', 'data-delay' => 50, 'data-tooltip' => 'ONLY PRESS ME IF THE GRAPH IS BROKEN!'} Refresh
