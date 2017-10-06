@@ -43,7 +43,7 @@ class Item < ApplicationRecord
         5.step(updates.size - 1, 6).map { |i| updates[i] }
       elsif day_range >= 30
         # averages each day
-        a = price_updates.group_by{ |x| x.created_at.to_date }
+        a = price_updates.group_by { |x| x.created_at.to_date }
         tmp = []
         a.each do |b|
           b = b
@@ -74,5 +74,4 @@ class Item < ApplicationRecord
     return false if last_update_time.nil?
     (Time.now - last_update_time) < 1.hour
   end
-
 end

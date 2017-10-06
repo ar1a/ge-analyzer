@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   def index
     @q = Item.ransack(params[:q])
-    if params[:q].nil?
-      @items = Item.all.sample(5)
-    else
-      @items = @q.result
-    end
+    @items = if params[:q].nil?
+               Item.all.sample(5)
+             else
+               @q.result
+             end
   end
 end
