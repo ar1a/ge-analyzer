@@ -20,5 +20,6 @@
 # Learn more: http://github.com/javan/whenever
 
 every 30.minutes do
+  env :PATH, ENV['PATH']
   runner 'PriceUpdate.update_all'
 end
