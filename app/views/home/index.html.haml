@@ -11,7 +11,11 @@
   .col.s12
     .card
       .card-content
-        %span.card-title Random Items
+        %span.card-title
+          - if @search
+            Search Results
+          - else
+            Random Items
         %ul.collapsible.popout{'data-collapsible': 'accordion'}
           - if @items.empty?
             Sorry, nothing found :(
