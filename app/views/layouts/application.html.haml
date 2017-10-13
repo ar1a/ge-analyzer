@@ -11,14 +11,14 @@
   %body
     - flash.each do |type, message|
       = javascript_tag "Materialize.toast('#{message}', 4000)"
-  %nav.green.darken-2
-    .nav-wrapper
-      %a.brand-logo.center{:href => root_path} Ge-Analyzer
-      %a.button-collapse{"data-activates" => "mobilenav", :href => "#"}
-        %i.material-icons menu
-      %ul.right.hide-on-med-and-down
-        = render 'navbar'
-      %ul#mobilenav.side-nav
-        = render 'navbar'
-  .container
-    = yield
+    %nav.green.darken-2
+      .nav-wrapper
+        %a.brand-logo.center{:href => root_path} Ge-Analyzer
+        %a.button-collapse{"data-activates" => "mobilenav", :href => "#"}
+          %i.material-icons menu
+        %ul.right.hide-on-med-and-down
+          = render 'navbar'
+        %ul#mobilenav.side-nav
+          = render 'navbar'
+    .container
+      = yield
