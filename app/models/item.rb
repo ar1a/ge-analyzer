@@ -22,8 +22,8 @@ class Item < ApplicationRecord
     #   update(icon: JSON.parse(RestClient.get("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item=#{runescape_id}").body)['item']['icon'])
     # end
     # icon
-    "http://services.runescape.com/m=itemdb_oldschool/1507199882434_obj_sprite.gif?id=#{runescape_id}"
-    # "https://rsbuddy.com/items/#{runescape_id}.png"
+    # "http://services.runescape.com/m=itemdb_oldschool/1507199882434_obj_sprite.gif?id=#{runescape_id}"
+    "http://cdn.rsbuddy.com/items/#{runescape_id}.png"
   end
 
   def price_history(day_range = 0)
