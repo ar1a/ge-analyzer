@@ -90,4 +90,6 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.relative_url_root = '/geanalyzer'
+
+  config.action_controller.forgery_protection_origin_check = false
 end
