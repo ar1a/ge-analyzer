@@ -21,9 +21,7 @@
 /yarn-error.log
 
 .byebug_history
-/bin
 
 config/database.yml
 config/secrets.yml
-bin/*
 /lib/capistrano/tasks/logs.cap
