@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     get 'items/:id/three', to: 'items#three', as: 'three'
     get 'items/:id/week', to: 'items#week', as: 'week'
     get 'items/:id/month', to: 'items#month', as: 'month'
-    get 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
+    post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
   end
   root 'welcome#index'
 

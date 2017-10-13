@@ -39,4 +39,6 @@
         - unless @item.timed_out?
           .card-action
             -# = link_to 'Refresh', refresh_path(@item.runescape_id)
-            %a.tooltipped{href: refresh_path(@item.runescape_id), 'data-position' => 'top', 'data-delay' => 50, 'data-tooltip' => 'ONLY PRESS ME IF THE GRAPH IS BROKEN!'} Refresh
+            %form{action: refresh_path(@item.runescape_id), method: 'post'}
+              -# %a.tooltipped{type: 'submit', 'data-position' => 'top', 'data-delay' => 50, 'data-tooltip' => 'ONLY PRESS ME IF THE GRAPH IS BROKEN!'} Refresh
+              %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'} Refresh
