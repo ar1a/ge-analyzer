@@ -29,20 +29,22 @@ class Item < ApplicationRecord
   def price_history(day_range = 0)
     if day_range <= 0
       price_updates.pluck(:created_at, :overall_average)
-    else
-      updates = price_updates
-                .where(
-                  created_at: (DateTime.current - day_range.days)..DateTime.current
-                )
-                .pluck(:created_at, :overall_average)
-      if day_range < 3
-        updates
-      elsif day_range >= 3 && day_range < 7
+    elsif day_range < 3
+      Rails.cache.fetch("#{cache_key}/price_history/daily") do
+        get_price_updates(day_range)
+      end
+    elsif day_range >= 3 && day_range < 7
+      Rails.cache.fetch("#{cache_key}/price_history/three") do
+        updates = get_price_updates(day_range)
         2.step(updates.size - 1, 3).map { |i| updates[i] }
-      elsif day_range == 7
+      end
+    elsif day_range == 7
+      Rails.cache.fetch("#{cache_key}/price_history/week") do
+        updates = get_price_updates(day_range)
         5.step(updates.size - 1, 6).map { |i| updates[i] }
-      elsif day_range >= 30
-        # averages each day
+      end
+    elsif day_range >= 30
+      Rails.cache.fetch("#{cache_key}/price_history/month") do
         a = price_updates.group_by { |x| x.created_at.to_date }
         tmp = []
         a.each do |b|
@@ -52,6 +54,14 @@ class Item < ApplicationRecord
         tmp
       end
     end
+  end
+
+  def get_price_updates(day_range)
+    price_updates
+      .where(
+      created_at: (DateTime.current - day_range.days)..DateTime.current
+    )
+      .pluck(:created_at, :overall_average)
   end
 
   def get_past_month(force = false)
