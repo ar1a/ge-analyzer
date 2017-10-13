@@ -82,7 +82,7 @@ class Item < ApplicationRecord
       p.sell_average = entry['sellingPrice'].to_i
       p.overall_average = entry['overallPrice'].to_i
       p.created_at = DateTime.strptime(entry['ts'].to_s, '%Q')
-      p.save unless p.buy_average <= 0 && p.sell_average <= 0 && p.overall_average <= 0
+      p.save
     end
   end
 
