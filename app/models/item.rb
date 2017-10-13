@@ -3,14 +3,20 @@ class Item < ApplicationRecord
 
   def price
     price_updates.last.overall_average
+  rescue NoMethodError
+    0
   end
 
   def buy_price
     price_updates.last.buy_average
+  rescue NoMethodError
+    0
   end
 
   def sell_price
     price_updates.last.sell_average
+  rescue NoMethodError
+    0
   end
 
   def margin
@@ -82,6 +88,6 @@ class Item < ApplicationRecord
 
   def timed_out?
     return false if last_update_time.nil?
-    (Time.now - last_update_time) < 1.hour
+    (Time.now - last_update_time) < 30.seconds
   end
 end
