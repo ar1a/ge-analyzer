@@ -1,6 +1,8 @@
 class ItemsController < ApplicationController
   before_action :find_item
-  def show; end
+  def show
+    @q = Item.ransack(params[:q])
+  end
 
   def daily
     render json: moving_average(@item.price_history(1))
