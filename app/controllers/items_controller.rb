@@ -5,19 +5,23 @@ class ItemsController < ApplicationController
   end
 
   def daily
-    render json: moving_average(@item.price_history(1))
+    # render json: moving_average(@item.price_history(1))
+    render json: @item.price_history(1)
   end
 
   def three
-    render json: moving_average(@item.price_history(3))
+    # render json: moving_average(@item.price_history(3))
+    render json: @item.price_history(3)
   end
 
   def week
-    render json: moving_average(@item.price_history(7))
+    # render json: moving_average(@item.price_history(7))
+    render json: @item.price_history(7)
   end
 
   def month
-    render json: moving_average(@item.price_history(30))
+    # render json: moving_average(@item.price_history(30))
+    render json: @item.price_history(30)
   end
 
   def moving_average(history, back = 5)
