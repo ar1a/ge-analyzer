@@ -1,11 +1,11 @@
-- cache @item do
-  .row
-    .col.s12.center
-      %h2 Item view
-    = render 'home/search'
-    .col.s12
-      .card
-        .card-content
+.row
+  .col.s12.center
+    %h2 Item view
+  = render 'home/search'
+  .col.s12
+    .card
+      .card-content
+        - cache @item do
           %span.card-title.center
             = @item.name
             = image_tag @item.icon_link, class: 'right img-responsive'
@@ -36,9 +36,9 @@
             = line_chart week_path(@item.runescape_id), label: 'Price', legend: true, height: '800px', min: nil, library: { pointSize: 0 }
           #month
             = line_chart month_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0 }, legend: true
-        - unless @item.timed_out?
-          .card-action
-            -# = link_to 'Refresh', refresh_path(@item.runescape_id)
-            %form{action: refresh_path(@item.runescape_id), method: 'post'}
-              -# %a.tooltipped{type: 'submit', 'data-position' => 'top', 'data-delay' => 50, 'data-tooltip' => 'ONLY PRESS ME IF THE GRAPH IS BROKEN!'} Refresh
-              %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'} Refresh
+      - unless @item.timed_out?
+        .card-action
+          -# = link_to 'Refresh', refresh_path(@item.runescape_id)
+          %form{action: refresh_path(@item.runescape_id), method: 'post'}
+            -# %a.tooltipped{type: 'submit', 'data-position' => 'top', 'data-delay' => 50, 'data-tooltip' => 'ONLY PRESS ME IF THE GRAPH IS BROKEN!'} Refresh
+            %button.btn.waves-effect.waves-light{type: 'submit', name: 'action'} Refresh
