@@ -6,10 +6,10 @@ end
 
 gem 'coffee-rails', '~> 4.2'
 gem 'jbuilder', '~> 2.5'
+gem 'pg'
 gem 'puma', '~> 3.7'
 gem 'rails', '~> 5.1.4'
 gem 'sass-rails', '~> 5.0'
-gem 'pg'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 
@@ -31,6 +31,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 gem 'chartkick'
 gem 'devise', '~> 4.3'
+gem 'draper'
 gem 'haml', '~> 5.0', '>= 5.0.3'
 gem 'haml-rails', '~> 1.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
