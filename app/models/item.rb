@@ -74,12 +74,24 @@ class Item < ApplicationRecord
       .pluck(:created_at, :overall_average)
   end
 
-  def get_past_month(force = false)
+  def get_past_month(force = false, recursion = 0)
     return if timed_out? && !force
-    time = (DateTime.now - 30.days).strftime('%Q')
+    return if recursion > 15
+    time = (DateTime.now - 30).strftime('%Q')
     data = JSON.parse RestClient.get("https://api.rsbuddy.com/grandExchange?a=graph&g=30&start=#{time}&i=#{runescape_id}").body
-    update(last_update_time: DateTime.now)
+    # TODO: Somehow fix this bug?
+    # If the first entry is new-ish, retry the get
+    # The rsbuddy api only seems to return it for the past week or so sometimes
+
+    delta = (DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q')) 
+    if delta < 25
+      puts delta.to_i
+      puts "Get failed! retrying"
+      sleep 3
+      return get_past_month(force, recursion + 1)
+    end
     price_updates.destroy_all
+    update(last_update_time: DateTime.now)
     data.each do |entry|
       p = price_updates.build
       p.buy_average = entry['buyingPrice'].to_i
