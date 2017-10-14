@@ -9,6 +9,9 @@
         %span.card-title
           - if @search
             Search Results
+            (
+            = @items.count
+            )
           - else
             Random Items
         %ul.collapsible.popout{'data-collapsible': 'accordion'}
