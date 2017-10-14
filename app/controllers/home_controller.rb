@@ -7,5 +7,6 @@ class HomeController < ApplicationController
                @search = true
                @q.result
              end
+    @items = ItemDecorator.decorate_collection(@items)
   end
 end

@@ -10,13 +10,13 @@
             = @item.name
             = image_tag @item.icon_link, class: 'right img-responsive'
           %b Buy price:
-          = number_to_currency(@item.buy_price, unit: 'gp', format: '%n %u', precision: 0)
+          = @item.buy_price
           %br
           %b Sell price:
-          = number_to_currency(@item.sell_price, unit: 'gp', format: '%n %u', precision: 0)
+          = @item.sell_price
           %br
           %b Margin:
-          = number_to_currency(@item.margin, unit: 'gp', format: '%n %u', precision: 0)
+          = @item.margin
         .card-tabs
           %ul.tabs
             %li.tab

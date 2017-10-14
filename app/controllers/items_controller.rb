@@ -2,6 +2,7 @@ class ItemsController < ApplicationController
   before_action :find_item
   def show
     @q = Item.ransack(params[:q])
+    @item = @item.decorate
   end
 
   def daily

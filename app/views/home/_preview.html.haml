@@ -3,19 +3,19 @@
     = image_tag preview.icon_link, class: 'left img-responsive'
     %b= preview.name
     &nbsp;
-    = number_to_currency(preview.price, unit: 'gp', format: '%n %u', precision: 0)
-    %span{class: "badge margin #{preview.margin_style}"}= number_to_currency(preview.margin, unit: 'gp', format: '%n %u', precision: 0)
+    = preview.price
+    %span{class: "badge margin #{preview.margin_style}"}= preview.margin
 
   .collapsible-body
     %span
       %b Buy price:
-      = number_to_currency(preview.buy_price, unit: 'gp', format: '%n %u', precision: 0)
+      = preview.buy_price
       %br
       %b Sell price:
-      = number_to_currency(preview.sell_price, unit: 'gp', format: '%n %u', precision: 0)
+      = preview.sell_price
       %br
       %b Margin:
-      = number_to_currency(preview.margin, unit: 'gp', format: '%n %u', precision: 0)
+      = preview.margin
       %br
       %a.btn.waves-effect.waves-light.green.darken-2{href: item_path(preview.runescape_id)}
         %i.material-icons.right send
