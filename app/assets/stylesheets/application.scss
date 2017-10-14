@@ -39,3 +39,17 @@ nav .input-field label {
     top: -8px;
     left: 0;
 }
+span.badge.margin {
+    font-weight: 300;
+    font-size: 0.8rem;
+    color: #fff;
+    border-radius: 2px;
+}
+
+span.badge.margin.positive {
+    @extend .light-green, .lighten-1, .black-text;
+}
+
+span.badge.margin.negative {
+    @extend .red, .lighten-1, .black-text;
+}

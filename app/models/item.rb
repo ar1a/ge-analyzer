@@ -23,6 +23,10 @@ class Item < ApplicationRecord
     sell_price - buy_price
   end
 
+  def margin_style
+    margin > 0 ? 'positive' : 'negative'
+  end
+
   def icon_link
     # if icon.nil?
     #   update(icon: JSON.parse(RestClient.get("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item=#{runescape_id}").body)['item']['icon'])
