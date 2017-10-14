@@ -23,3 +23,8 @@ every 30.minutes do
   env :PATH, ENV['PATH']
   runner 'PriceUpdate.update_all'
 end
+
+every 2.days do
+  env :PATH, ENV['PATH']
+  rake 'delete:price_updates'
+end
