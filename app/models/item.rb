@@ -59,7 +59,7 @@ class Item < ApplicationRecord
         tmp = []
         a.each do |b|
           b = b
-          tmp << [b[0], b[1].map(&:overall_average).reduce(:+) / b[1].size.to_f]
+          tmp << [b[0], (b[1].map(&:overall_average).reduce(:+) / b[1].size.to_f).to_i]
         end
         tmp
       end
