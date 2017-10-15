@@ -4,12 +4,17 @@ class HomeController < ApplicationController
     @items = if params[:q].nil?
                # Item.all.sample(5)
                arr = []
-               items = Item.all
+               # items = Item.all
+               items = Item.positive_roi
+               repeat = 0
                loop do
                  break if arr.count >= 5
+                 break if repeat > 50
+                 repeat += 1
                  i = items.sample
+                 next if i.nil?
                  # TODO: make these options?
-                 arr << i if i.margin > 0 && i.roi > 1 && i.roi < 150
+                 arr << i if i.margin > 0
                end
                arr
              else

@@ -1,6 +1,13 @@
 class Item < ApplicationRecord
   has_many :price_updates
 
+  scope :positive_roi, lambda {
+    joins(:price_updates)
+      .where('price_updates.created_at = (SELECT MAX(price_updates.created_at) FROM price_updates WHERE price_updates.item_id = items.id)')
+      .where('price_updates.roi > ?', 0.02)
+      .where('price_updates.roi < ?', 150)
+  }
+
   def price
     price_updates.last.overall_average
   rescue NoMethodError
@@ -66,8 +73,8 @@ class Item < ApplicationRecord
   def get_price_updates(day_range)
     price_updates
       .where(
-      created_at: (DateTime.current - day_range.days)..DateTime.current
-    )
+        created_at: (DateTime.current - day_range.days)..DateTime.current
+      )
       .pluck(:created_at, :overall_average)
   end
 
@@ -84,10 +91,10 @@ class Item < ApplicationRecord
     # If the first entry is new-ish, retry the get
     # The rsbuddy api only seems to return it for the past week or so sometimes
 
-    delta = p(DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q')) 
+    delta = p(DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q'))
     if delta < 25
       puts delta.to_i
-      puts "Get failed! retrying"
+      puts 'Get failed! retrying'
       sleep 3
       return get_past_month(force, recursion + 1)
     end
