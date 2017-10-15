@@ -22,7 +22,7 @@ class Item < ApplicationRecord
 
   def roi
     return 0.to_f if buy_price <= 0
-    (sell_price.to_f - buy_price.to_f) / buy_price.to_f
+    margin / price.to_f
   end
 
   def margin
