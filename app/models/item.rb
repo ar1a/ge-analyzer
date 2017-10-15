@@ -5,6 +5,14 @@ class Item < ApplicationRecord
     where('roi > 0.0001')
   }
 
+
+  def roi
+    if (val = self[:roi]).nil?
+      0
+    else
+      val
+    end
+  end
   def price
     price_updates.last.overall_average
   rescue NoMethodError

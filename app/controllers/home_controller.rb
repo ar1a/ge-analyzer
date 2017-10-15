@@ -22,7 +22,7 @@ class HomeController < ApplicationController
                @q.result
              end
     @items = @items.first(50) # limit it
-    @items.sort! { |x,y| y.roi <=> x.roi }
+    @items.sort! { |x, y| y.roi <=> x.roi }
     @items = ItemDecorator.decorate_collection(@items)
   end
 end
