@@ -46,4 +46,7 @@ class ItemDecorator < ApplicationDecorator
     h.number_to_currency(value, unit: 'gp', format: '%n %u', precision: 0)
   end
 
+  def margin_style
+    margin > 0 ? 'positive' : 'negative'
+  end
 end
