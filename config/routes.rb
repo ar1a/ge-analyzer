@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  # authenticated :user do
   root 'home#index'
   resources :items, only: %i[show]
   get 'items/:id/daily', to: 'items#daily', as: 'daily'
@@ -7,7 +6,9 @@ Rails.application.routes.draw do
   get 'items/:id/week', to: 'items#week', as: 'week'
   get 'items/:id/month', to: 'items#month', as: 'month'
   post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
-  # end
+  authenticated :user, ->(user) { user.username == 'ar1a' } do
+    mount Blazer::Engine, at: 'blazer'
+  end
   # root 'welcome#index'
 
   devise_for :users
