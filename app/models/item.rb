@@ -2,7 +2,8 @@ class Item < ApplicationRecord
   has_many :price_updates
 
   scope :positive_roi, lambda {
-    where('roi > 0.03')
+    where('roi > 0.001')
+      .where('selling_rate > 5')
   }
 
 
