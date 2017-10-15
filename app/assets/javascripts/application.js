@@ -16,6 +16,7 @@
 //= require materialize-sprockets
 //= require materialize/extras/nouislider
 //= require chartkick
+//= require ahoy
 //= require_tree .
 
 // Tab fix
