@@ -20,12 +20,12 @@ class PriceUpdate < ApplicationRecord
   #   end
   # end
   def self.update_all
-    Item.all.each do |i|
+    Parallel.each(Item.all) do |i|
       thing = JSON.parse RestClient.get("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
       update = i.price_updates.build
       update.buy_average = thing['overall'].to_i
-      update.sell_average = thing['selling'].to_i
-      update.overall_average = thing['buying'].to_i
+      update.sell_average = thing['buying'].to_i
+      update.overall_average = thing['selling'].to_i
       update.roi = if update.buy_average <= 0
                      0
                    else
@@ -33,5 +33,6 @@ class PriceUpdate < ApplicationRecord
                    end
       i.update(roi: update.roi, buying_rate: thing['buyingQuantity'], selling_rate: thing['sellingQuantity'])
     end
+    PriceUpdate.connection.reconnect!
   end
 end
