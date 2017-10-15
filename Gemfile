@@ -29,6 +29,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 # Custom gems
 
+gem 'ahoy'
 gem 'chartkick'
 gem 'devise', '~> 4.3'
 gem 'draper'
@@ -36,10 +37,12 @@ gem 'haml', '~> 5.0', '>= 5.0.3'
 gem 'haml-rails', '~> 1.0'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'materialize-sass', '~> 0.100.2'
+gem 'parallel'
 gem 'pry-rails'
 gem 'ransack'
 gem 'rest-client', '~> 2.0', '>= 2.0.2'
 gem 'whenever'
+gem 'yaml_db'
 
 # Capistrano
 
@@ -47,5 +50,3 @@ gem 'capistrano', '~> 3.7', '>= 3.7.1'
 gem 'capistrano-passenger', '~> 0.2.0'
 gem 'capistrano-rails', '~> 1.2'
 gem 'capistrano-rbenv', '~> 2.1'
-gem 'parallel'
-gem 'yaml_db'
