@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015141353) do
+ActiveRecord::Schema.define(version: 20171015155220) do
 
   create_table "items", force: :cascade do |t|
     t.integer "runescape_id"
@@ -20,9 +20,13 @@ ActiveRecord::Schema.define(version: 20171015141353) do
     t.string "icon"
     t.datetime "last_update_time"
     t.decimal "roi"
+    t.integer "buying_rate"
+    t.integer "selling_rate"
+    t.index ["buying_rate"], name: "index_items_on_buying_rate"
     t.index ["name"], name: "index_items_on_name"
     t.index ["roi"], name: "index_items_on_roi"
     t.index ["runescape_id"], name: "index_items_on_runescape_id"
+    t.index ["selling_rate"], name: "index_items_on_selling_rate"
   end
 
   create_table "price_updates", force: :cascade do |t|

@@ -14,7 +14,7 @@ class HomeController < ApplicationController
                  i = items.sample
                  next if i.nil?
                  # TODO: make these options?
-                 arr << i if i.margin > 0
+                 arr << i if i.margin > 0 && i.price > 1_000
                end
                arr
              else

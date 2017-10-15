@@ -24,6 +24,10 @@ class ItemDecorator < ApplicationDecorator
     object.margin.abs != object.price.abs && object.margin != 0
   end
 
+  def traded
+    (buying_rate + selling_rate) / 2
+  end
+
   def roi
     return '(0 %)' if object.roi.nil?
     roi = object.roi.round 4

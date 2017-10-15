@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   has_many :price_updates
 
   scope :positive_roi, lambda {
-    where('roi > 0.0001')
+    where('roi > 0.03')
   }
 
 
@@ -115,5 +115,14 @@ class Item < ApplicationRecord
   def timed_out?
     return false if last_update_time.nil?
     (Time.now - last_update_time) < 30.seconds
+  end
+
+  def self.update_all
+    thing = JSON.parse RestClient.get('https://rsbuddy.com/exchange/summary.json').body
+    thing.each do |i|
+      i = i[1]
+      item = Item.find_or_create_by(runescape_id: i['id'])
+      item.update(name: i['name'])
+    end
   end
 end
