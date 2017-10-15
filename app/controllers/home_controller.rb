@@ -21,6 +21,8 @@ class HomeController < ApplicationController
                @search = true
                @q.result
              end
-    @items = ItemDecorator.decorate_collection(@items.first(50))
+    @items = @items.first(50) # limit it
+    @items.sort! { |x,y| y.roi <=> x.roi }
+    @items = ItemDecorator.decorate_collection(@items)
   end
 end
