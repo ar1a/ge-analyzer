@@ -6,4 +6,5 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-PriceUpdate.update_all # gets items and latest prices
+Item.update_all
+PriceUpdate.update_all # gets latest prices
