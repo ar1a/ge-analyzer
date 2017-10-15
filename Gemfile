@@ -30,6 +30,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 # Custom gems
 
 gem 'ahoy_matey'
+gem 'blazer'
 gem 'chartkick'
 gem 'devise', '~> 4.3'
 gem 'draper'
