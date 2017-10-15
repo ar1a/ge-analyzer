@@ -21,7 +21,7 @@
 
 // Tab fix
 
-$(document).on('turbolinks:load', function() {
+$(document).on('turbolinks:load', function(event) {
     $('ul.tabs').tabs({
         onShow: function() {
             for (var key in Chartkick.charts) {
@@ -36,4 +36,10 @@ $(document).on('turbolinks:load', function() {
         e.preventDefault();
         ahoy.track('Refreshed item', e.target.dataset);
     });
+
+    if (typeof(ga) == 'function') {
+        console.log(event);
+        ga('set', 'location', event.originalEvent.data.url);
+        ga('send', 'pageview');
+    }
 });
