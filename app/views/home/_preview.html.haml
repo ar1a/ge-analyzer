@@ -4,7 +4,9 @@
     %b= preview.name
     &nbsp;
     = preview.price
-    %span{class: "badge margin #{preview.margin_style}"}= preview.margin
+    %span{class: "badge margin #{preview.margin_style}"}
+      = preview.margin
+      = preview.roi
 
   .collapsible-body
     %span
