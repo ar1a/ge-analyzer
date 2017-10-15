@@ -20,11 +20,6 @@ class Item < ApplicationRecord
     0
   end
 
-  def roi
-    return 0.to_f if buy_price <= 0
-    margin / price.to_f
-  end
-
   def margin
     sell_price - buy_price
   end
@@ -74,6 +69,10 @@ class Item < ApplicationRecord
       created_at: (DateTime.current - day_range.days)..DateTime.current
     )
       .pluck(:created_at, :overall_average)
+  end
+
+  def roi
+    price_updates.last.roi
   end
 
   def get_past_month(force = false, recursion = 0)
