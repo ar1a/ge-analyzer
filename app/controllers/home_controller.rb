@@ -21,6 +21,6 @@ class HomeController < ApplicationController
                @search = true
                @q.result
              end
-    @items = ItemDecorator.decorate_collection(@items)
+    @items = ItemDecorator.decorate_collection(@items.first(50))
   end
 end
