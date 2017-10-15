@@ -32,12 +32,10 @@ $(document).on('turbolinks:load', function(event) {
     });
 
     $('#refresh-button').on('click', function(e) {
-        e.preventDefault();
-        ahoy.track('Refreshed item', e.target.dataset);
+        ga('send', 'event', 'Items', 'refresh', e.target.dataset.name);
     });
 
     if (typeof(ga) == 'function') {
-        console.log(event);
         ga('set', 'location', event.originalEvent.data.url);
         ga('send', 'pageview');
     }
