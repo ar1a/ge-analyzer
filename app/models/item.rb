@@ -2,7 +2,7 @@ class Item < ApplicationRecord
   has_many :price_updates
 
   scope :positive_roi, lambda {
-    where('roi > 0.1')
+    where('roi > 0.0001')
   }
 
   def price
@@ -29,11 +29,6 @@ class Item < ApplicationRecord
   end
 
   def icon_link
-    # if icon.nil?
-    #   update(icon: JSON.parse(RestClient.get("http://services.runescape.com/m=itemdb_oldschool/api/catalogue/detail.json?item=#{runescape_id}").body)['item']['icon'])
-    # end
-    # icon
-    # "http://services.runescape.com/m=itemdb_oldschool/1507199882434_obj_sprite.gif?id=#{runescape_id}"
     "http://cdn.rsbuddy.com/items/#{runescape_id}.png"
   end
 

@@ -16,8 +16,8 @@ class ItemDecorator < ApplicationDecorator
 
   def roi_raw
     return '0 %' unless valid?
-    roi = object.roi.round(2)
-    "#{roi} %"
+    roi = object.roi.round 4
+    "#{roi * 100} %"
   end
 
   def valid?
@@ -26,9 +26,9 @@ class ItemDecorator < ApplicationDecorator
 
   def roi
     return '(0 %)' if object.roi.nil?
-    roi = object.roi.round(2)
-    return if roi <= 0.01
-    "(#{roi} %)"
+    roi = object.roi.round 4
+    return if roi <= 0.0001
+    "(#{roi * 100} %)"
   end
 
   def buy_price
@@ -49,6 +49,6 @@ class ItemDecorator < ApplicationDecorator
 
   def margin_style
     return 'negative' if object.roi.nil?
-    object.roi.round(2) > 0.01 ? 'positive' : 'negative'
+    object.roi.round(4) > 0.0001 ? 'positive' : 'negative'
   end
 end
