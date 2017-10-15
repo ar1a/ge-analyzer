@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171015121557) do
+ActiveRecord::Schema.define(version: 20171015141353) do
 
   create_table "items", force: :cascade do |t|
     t.integer "runescape_id"
@@ -19,7 +19,9 @@ ActiveRecord::Schema.define(version: 20171015121557) do
     t.datetime "updated_at", null: false
     t.string "icon"
     t.datetime "last_update_time"
+    t.decimal "roi"
     t.index ["name"], name: "index_items_on_name"
+    t.index ["roi"], name: "index_items_on_roi"
     t.index ["runescape_id"], name: "index_items_on_runescape_id"
   end
 

@@ -16,6 +16,7 @@ class PriceUpdate < ApplicationRecord
                    else
                      (update.sell_average.to_f - update.buy_average.to_f) / update.overall_average.to_f
                    end
+      item.update(roi: update.roi)
       update.save
     end
   end

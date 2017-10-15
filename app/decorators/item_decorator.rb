@@ -10,12 +10,12 @@ class ItemDecorator < ApplicationDecorator
   #     end
   #   end
   def margin
-    return "- gp" unless valid?
+    return '- gp' unless valid?
     format_gp(object.margin)
   end
 
   def roi_raw
-    return "0 %" unless valid?
+    return '0 %' unless valid?
     roi = object.roi.round(2)
     "#{roi} %"
   end
@@ -25,6 +25,7 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def roi
+    return '(0 %)' if object.roi.nil?
     roi = object.roi.round(2)
     return if roi <= 0.01
     "(#{roi} %)"
@@ -47,6 +48,7 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def margin_style
+    return 'negative' if object.roi.nil?
     object.roi.round(2) > 0.01 ? 'positive' : 'negative'
   end
 end

@@ -2,10 +2,7 @@ class Item < ApplicationRecord
   has_many :price_updates
 
   scope :positive_roi, lambda {
-    joins(:price_updates)
-      .where('price_updates.created_at = (SELECT MAX(price_updates.created_at) FROM price_updates WHERE price_updates.item_id = items.id)')
-      .where('price_updates.roi > ?', 0.02)
-      .where('price_updates.roi < ?', 150)
+    where('roi > 0.1')
   }
 
   def price
@@ -78,10 +75,6 @@ class Item < ApplicationRecord
       .pluck(:created_at, :overall_average)
   end
 
-  def roi
-    price_updates.last.roi
-  end
-
   def get_past_month(force = false, recursion = 0)
     return if timed_out? && !force
     return if recursion > 15
@@ -113,6 +106,7 @@ class Item < ApplicationRecord
               end
       p.save
     end
+    update(roi: price_updates.last.roi)
   end
 
   def timed_out?
