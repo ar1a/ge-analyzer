@@ -31,4 +31,9 @@ $(document).on('turbolinks:load', function() {
             }
         }
     });
+
+    $('#refresh-button').on('click', function(e) {
+        e.preventDefault();
+        ahoy.track('Refreshed item', e.target.dataset);
+    });
 });
