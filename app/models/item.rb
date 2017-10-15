@@ -16,7 +16,7 @@ class Item < ApplicationRecord
   def sell_price
     price_updates.last.sell_average
   rescue NoMethodError
-    puts "rescued"
+    puts 'rescued'
     0
   end
 
@@ -85,7 +85,7 @@ class Item < ApplicationRecord
     # If the first entry is new-ish, retry the get
     # The rsbuddy api only seems to return it for the past week or so sometimes
 
-    delta = (DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q')) 
+    delta = p(DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q')) 
     if delta < 25
       puts delta.to_i
       puts "Get failed! retrying"
@@ -100,6 +100,11 @@ class Item < ApplicationRecord
       p.sell_average = entry['sellingPrice'].to_i
       p.overall_average = entry['overallPrice'].to_i
       p.created_at = DateTime.strptime(entry['ts'].to_s, '%Q')
+      p.roi = if p.buy_average <= 0
+                0
+              else
+                (p.sell_average.to_f - p.buy_average.to_f) / p.overall_average.to_f
+              end
       p.save
     end
   end

@@ -11,6 +11,11 @@ class PriceUpdate < ApplicationRecord
       update.buy_average = i['buy_average'].to_i
       update.sell_average = i['sell_average'].to_i
       update.overall_average = i['overall_average'].to_i
+      update.roi = if update.buy_average <= 0
+                     0
+                   else
+                     (update.sell_average.to_f - update.buy_average.to_f) / update.overall_average.to_f
+                   end
       update.save
     end
   end
