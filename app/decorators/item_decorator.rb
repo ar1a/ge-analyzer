@@ -47,6 +47,6 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def margin_style
-    margin > 0 ? 'positive' : 'negative'
+    object.roi.round(2) > 0.01 ? 'positive' : 'negative'
   end
 end
