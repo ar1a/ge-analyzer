@@ -9,7 +9,7 @@ class HomeController < ApplicationController
                  break if arr.count >= 5
                  i = items.sample
                  # TODO: make these options?
-                 arr << i if i.margin > 0 && i.roi > 1
+                 arr << i if i.margin > 0 && i.roi > 1 && i.roi < 150
                end
                arr
              else
