@@ -31,6 +31,7 @@ class PriceUpdate < ApplicationRecord
                    else
                      (update.sell_average.to_f - update.buy_average.to_f) / update.overall_average.to_f
                    end
+      i.update_ema
       i.update_roi(update.roi)
       i.update(buying_rate: thing['buyingQuantity'], selling_rate: thing['sellingQuantity'])
     end

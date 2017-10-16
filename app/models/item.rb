@@ -14,6 +14,10 @@ class Item < ApplicationRecord
     end
   end
 
+  def most_recent
+    price_updates.order('created_at desc').last
+  end
+
   def buying_rate
     if (val = self[:buying_rate]).nil?
       0
@@ -102,6 +106,26 @@ class Item < ApplicationRecord
     update(roi: other)
   end
 
+  def update_ema
+    update(recommended_buy_price: 
+      price_updates
+        .where(created_at: 1.day.ago..DateTime.now)
+        .order('created_at asc')
+        .pluck(:buy_average)
+        .reject { |x| x <= 0 }
+      .ema)
+    update(recommended_sell_price: 
+      price_updates
+        .where(created_at: 1.day.ago..DateTime.now)
+        .order('created_at asc')
+        .pluck(:sell_average)
+        .reject { |x| x <= 0 }
+      .ema)
+  rescue
+    update(recommended_buy_price: most_recent.buy_average,
+      recommended_sell_price: most_recent.sell_average)
+  end
+
   def get_past_month(force = false, recursion = 0)
     return if timed_out? && !force
     return if recursion > 15
@@ -133,6 +157,7 @@ class Item < ApplicationRecord
               end
       p.save
     end
+    update_ema
     update_roi(price_updates.last.roi)
   end
 
@@ -148,23 +173,5 @@ class Item < ApplicationRecord
       item = Item.find_or_create_by(runescape_id: i['id'])
       item.update(name: i['name'])
     end
-  end
-
-  def recommended_buy_price
-    price_updates
-      .where(created_at: 1.day.ago..DateTime.now)
-      .order('created_at asc')
-      .pluck(:buy_average)
-      .reject { |x| x <= 0 }
-      .ema
-  end
-
-  def recommended_sell_price
-    price_updates
-      .where(created_at: 1.day.ago..DateTime.now)
-      .order('created_at asc')
-      .pluck(:sell_average)
-      .reject { |x| x <= 0 }
-      .ema
   end
 end
