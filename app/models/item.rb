@@ -14,6 +14,22 @@ class Item < ApplicationRecord
     end
   end
 
+  def recommended_buy_price
+    if (val = self[:recommended_buy_price]).nil? || val.nan?
+      0
+    else
+      val
+    end
+  end
+
+  def recommended_sell_price
+    if (val = self[:recommended_sell_price]).nil? || val.nan?
+      0
+    else
+      val
+    end
+  end
+
   def most_recent
     price_updates.order('created_at desc').last
   end
