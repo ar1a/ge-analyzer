@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016102304) do
+ActiveRecord::Schema.define(version: 20171016113831) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20171016102304) do
     t.datetime "updated_at", null: false
     t.decimal "roi"
     t.index ["created_at"], name: "index_price_updates_on_created_at"
+    t.index ["item_id"], name: "index_price_updates_on_item_id"
     t.index ["roi"], name: "index_price_updates_on_roi"
   end
 
