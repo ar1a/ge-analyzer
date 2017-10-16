@@ -25,7 +25,7 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def traded
-    (buying_rate + selling_rate) / 2
+    h.number_to_human((buying_rate + selling_rate) / 2)
   end
 
   def roi
