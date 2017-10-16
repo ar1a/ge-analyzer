@@ -50,7 +50,7 @@ class Item < ApplicationRecord
   end
 
   def margin
-    sell_price - buy_price
+    recommended_sell_price - recommended_buy_price
   end
 
   def icon_link
@@ -146,14 +146,18 @@ class Item < ApplicationRecord
   def recommended_buy_price
     price_updates
       .where(created_at: 1.day.ago..DateTime.now)
+      .order('created_at asc')
       .pluck(:buy_average)
+      .reject { |x| x <= 0 }
       .ema
   end
 
   def recommended_sell_price
     price_updates
       .where(created_at: 1.day.ago..DateTime.now)
+      .order('created_at asc')
       .pluck(:sell_average)
+      .reject { |x| x <= 0 }
       .ema
   end
 end
