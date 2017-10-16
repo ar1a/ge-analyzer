@@ -3,7 +3,8 @@ class Item < ApplicationRecord
 
   scope :positive_roi, lambda {
     where('roi > 0.001')
-      .where('selling_rate > 5')
+      .where('selling_rate > 30')
+      .where('buying_rate > 30')
   }
 
   def roi
