@@ -8,7 +8,7 @@ class Item < ApplicationRecord
 
 
   def roi
-    if (val = self[:roi]).nil?
+    if (val = self[:roi]).nil? || val.nan?
       0
     else
       val
@@ -16,7 +16,7 @@ class Item < ApplicationRecord
   end
 
   def buying_rate
-    if (val = self[:buying_rate]).nil?
+    if (val = self[:buying_rate]).nil? || val.nan?
       0
     else
       val
@@ -24,7 +24,7 @@ class Item < ApplicationRecord
   end
 
   def selling_rate
-    if (val = self[:buying_rate]).nil?
+    if (val = self[:buying_rate]).nil? || val.nan?
       0
     else
       val
