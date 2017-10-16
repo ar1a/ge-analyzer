@@ -14,6 +14,23 @@ class Item < ApplicationRecord
       val
     end
   end
+
+  def buying_rate
+    if (val = self[:buying_rate]).nil?
+      0
+    else
+      val
+    end
+  end
+
+  def selling_rate
+    if (val = self[:buying_rate]).nil?
+      0
+    else
+      val
+    end
+  end
+
   def price
     price_updates.last.overall_average
   rescue NoMethodError
