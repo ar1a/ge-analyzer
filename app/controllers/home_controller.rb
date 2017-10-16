@@ -7,16 +7,17 @@ class HomeController < ApplicationController
                # items = Item.all
                items = Item.positive_roi
                repeat = 0
-               loop do
-                 break if arr.count >= 5
-                 break if repeat > 50
-                 repeat += 1
-                 i = items.sample
-                 next if i.nil?
-                 # TODO: make these options?
-                 arr << i if i.margin > 0 && i.price > 1_000
-               end
-               arr
+               items.sample(5)
+               # loop do
+               #   break if arr.count >= 5
+               #   break if repeat > 50
+               #   repeat += 1
+               #   i = items.sample
+               #   next if i.nil?
+               #   # TODO: make these options?
+               #   arr << i
+               # end
+               # arr
              else
                @search = true
                @q.result
