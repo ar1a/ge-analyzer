@@ -6,7 +6,6 @@ class Item < ApplicationRecord
       .where('selling_rate > 5')
   }
 
-
   def roi
     if (val = self[:roi]).nil? || val.nan?
       0
@@ -142,5 +141,19 @@ class Item < ApplicationRecord
       item = Item.find_or_create_by(runescape_id: i['id'])
       item.update(name: i['name'])
     end
+  end
+
+  def recommended_buy_price
+    price_updates
+      .where(created_at: 1.day.ago..DateTime.now)
+      .pluck(:buy_average)
+      .ema
+  end
+
+  def recommended_sell_price
+    price_updates
+      .where(created_at: 1.day.ago..DateTime.now)
+      .pluck(:sell_average)
+      .ema
   end
 end
