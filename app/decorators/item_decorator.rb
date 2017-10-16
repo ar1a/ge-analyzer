@@ -31,7 +31,7 @@ class ItemDecorator < ApplicationDecorator
   def roi
     return '(0 %)' if object.roi.nil?
     roi = object.roi.round 4
-    return if roi <= 0.0001
+    return if roi <= 0.0001 || roi.nan?
     "(#{roi * 100} %)"
   end
 
