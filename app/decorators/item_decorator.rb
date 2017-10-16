@@ -43,6 +43,14 @@ class ItemDecorator < ApplicationDecorator
     format_gp(object.sell_price)
   end
 
+  def recommended_buy
+    format_gp(object.recommended_buy_price)
+  end
+
+  def recommended_sell
+    format_gp(object.recommended_sell_price)
+  end
+
   def price
     format_gp(object.price)
   end

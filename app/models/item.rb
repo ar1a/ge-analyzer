@@ -95,6 +95,13 @@ class Item < ApplicationRecord
       .pluck(:created_at, :overall_average)
   end
 
+  def update_roi(other)
+    roi = margin / recommended_buy_price
+    update(roi: roi)
+  rescue
+    update(roi: other)
+  end
+
   def get_past_month(force = false, recursion = 0)
     return if timed_out? && !force
     return if recursion > 15
@@ -115,8 +122,8 @@ class Item < ApplicationRecord
     update(last_update_time: DateTime.now)
     data.each do |entry|
       p = price_updates.build
-      p.buy_average = entry['buyingPrice'].to_i
-      p.sell_average = entry['sellingPrice'].to_i
+      p.buy_average = entry['sellingPrice'].to_i
+      p.sell_average = entry['buyingPrice'].to_i
       p.overall_average = entry['overallPrice'].to_i
       p.created_at = DateTime.strptime(entry['ts'].to_s, '%Q')
       p.roi = if p.buy_average <= 0
@@ -126,7 +133,7 @@ class Item < ApplicationRecord
               end
       p.save
     end
-    update(roi: price_updates.last.roi)
+    update_roi(price_updates.last.roi)
   end
 
   def timed_out?

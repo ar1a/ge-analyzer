@@ -10,10 +10,16 @@
             = @item.name
             = image_tag @item.icon_link, class: 'right img-responsive'
           %b Buy price:
+          = @item.recommended_buy
+          (
           = @item.buy_price
+          )
           %br
           %b Sell price:
+          = @item.recommended_sell
+          (
           = @item.sell_price
+          )
           %br
           %b Margin:
           = @item.margin
