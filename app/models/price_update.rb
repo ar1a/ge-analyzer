@@ -34,6 +34,7 @@ class PriceUpdate < ApplicationRecord
                    end
       i.update_ema
       i.update_roi(update.roi)
+      i.update_margin
       i.update(buying_rate: thing['buyingQuantity'], selling_rate: thing['sellingQuantity'])
     end
     PriceUpdate.connection.reconnect!

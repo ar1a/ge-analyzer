@@ -5,6 +5,7 @@ class Item < ApplicationRecord
     where('roi > 0.001')
       .where('selling_rate > 30')
       .where('buying_rate > 30')
+      .where('margin > ?', 10_000)
   }
 
   def roi
@@ -70,10 +71,6 @@ class Item < ApplicationRecord
     0
   end
 
-  def margin
-    recommended_sell_price - recommended_buy_price
-  end
-
   def icon_link
     "http://cdn.rsbuddy.com/items/#{runescape_id}.png"
   end
@@ -121,6 +118,10 @@ class Item < ApplicationRecord
     update(roi: roi)
   rescue
     update(roi: other)
+  end
+
+  def update_margin
+    update(margin: recommended_sell_price - recommended_buy_price)
   end
 
   def update_ema
@@ -178,6 +179,7 @@ class Item < ApplicationRecord
     end
     update_ema
     update_roi(price_updates.last.roi)
+    update_margin
   end
 
   def timed_out?

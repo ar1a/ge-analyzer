@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016113831) do
+ActiveRecord::Schema.define(version: 20171016151332) do
 
   create_table "ahoy_events", force: :cascade do |t|
     t.integer "visit_id"
@@ -89,7 +89,9 @@ ActiveRecord::Schema.define(version: 20171016113831) do
     t.integer "selling_rate"
     t.decimal "recommended_buy_price"
     t.decimal "recommended_sell_price"
+    t.integer "margin"
     t.index ["buying_rate"], name: "index_items_on_buying_rate"
+    t.index ["margin"], name: "index_items_on_margin"
     t.index ["name"], name: "index_items_on_name"
     t.index ["recommended_buy_price"], name: "index_items_on_recommended_buy_price"
     t.index ["recommended_sell_price"], name: "index_items_on_recommended_sell_price"
