@@ -124,20 +124,22 @@ class Item < ApplicationRecord
   end
 
   def update_ema
-    update(recommended_buy_price: 
-      price_updates
-        .where(created_at: 1.day.ago..DateTime.now)
-        .order('created_at asc')
-        .pluck(:buy_average)
-        .reject { |x| x <= 0 }
-      .ema)
-    update(recommended_sell_price: 
-      price_updates
-        .where(created_at: 1.day.ago..DateTime.now)
-        .order('created_at asc')
-        .pluck(:sell_average)
-        .reject { |x| x <= 0 }
-      .ema)
+    buy = price_updates
+      .where(created_at: 1.day.ago..DateTime.now)
+      .order('created_at asc')
+      .pluck(:buy_average)
+      .reject { |x| x <= 0 }
+    buy.extend Basic::Stats
+    buy.reject_outliers!
+    update(recommended_buy_price: buy.ema)
+    sell = price_updates
+      .where(created_at: 1.day.ago..DateTime.now)
+      .order('created_at asc')
+      .pluck(:sell_average)
+      .reject { |x| x <= 0 }
+    sell.extend Basic::Stats
+    sell.reject_outliers!
+    update(recommended_sell_price: sell.ema)
   rescue
     update(recommended_buy_price: most_recent.buy_average,
       recommended_sell_price: most_recent.sell_average)
