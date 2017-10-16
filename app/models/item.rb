@@ -16,7 +16,7 @@ class Item < ApplicationRecord
   end
 
   def buying_rate
-    if (val = self[:buying_rate]).nil? || val.nan?
+    if (val = self[:buying_rate]).nil?
       0
     else
       val
@@ -24,7 +24,7 @@ class Item < ApplicationRecord
   end
 
   def selling_rate
-    if (val = self[:buying_rate]).nil? || val.nan?
+    if (val = self[:buying_rate]).nil?
       0
     else
       val
