@@ -115,12 +115,18 @@ class Item < ApplicationRecord
 
   def update_roi(other)
     roi = margin / recommended_buy_price
+    raise 'hit the rescue nigga' if roi.nan? || roi.infinite?
     update(roi: roi)
   rescue
     update(roi: other)
   end
 
   def update_margin
+    margin = recommended_sell_price - recommended_buy_price
+    if margin.infinite? || margin.nan?
+      update(margin: -1)
+      return
+    end
     update(margin: recommended_sell_price - recommended_buy_price)
   end
 
@@ -131,19 +137,34 @@ class Item < ApplicationRecord
           .pluck(:buy_average)
           .reject { |x| x <= 0 }
     buy.extend Basic::Stats
-    buy.reject_outliers!
-    update(recommended_buy_price: buy.ema)
+    p 'buy'
+    puts buy.count
+    p buy
+    if buy.count <= 3
+      update(recommended_buy_price: most_recent.buy_average)
+    else
+      buy.reject_outliers!
+      update(recommended_buy_price: buy.ema)
+    end
     sell = price_updates
            .where(created_at: 1.day.ago..DateTime.now)
            .order('created_at asc')
            .pluck(:sell_average)
            .reject { |x| x <= 0 }
     sell.extend Basic::Stats
-    sell.reject_outliers!
-    update(recommended_sell_price: sell.ema)
-  rescue
-    update(recommended_buy_price: most_recent.buy_average,
-           recommended_sell_price: most_recent.sell_average)
+    puts 'sell'
+    puts sell.count
+    p sell
+    if sell.count <= 3
+      update(recommended_sell_price: most_recent.sell_average)
+    else
+      sell.reject_outliers!
+      update(recommended_sell_price: sell.ema)
+    end
+    # rescue => e
+    #   p e
+    #   update(recommended_buy_price: most_recent.buy_average,
+    #          recommended_sell_price: most_recent.sell_average)
   end
 
   def get_past_month(force = false, recursion = 0)
@@ -155,7 +176,7 @@ class Item < ApplicationRecord
     # If the first entry is new-ish, retry the get
     # The rsbuddy api only seems to return it for the past week or so sometimes
 
-    delta = p(DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q'))
+    delta = (DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q'))
     if delta < 25
       puts delta.to_i
       puts 'Get failed! retrying'
