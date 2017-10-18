@@ -28,6 +28,7 @@ class HomeController < ApplicationController
   end
 
   def most_traded
+    @q = Item.ransack(params[:q])
     @items = Item.most_traded.to_a
     @items.sort! { |x, y| y.roi.to_f <=> x.roi.to_f }
     @items = ItemDecorator.decorate_collection(@items)
