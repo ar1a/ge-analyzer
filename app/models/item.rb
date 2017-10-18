@@ -145,7 +145,7 @@ class Item < ApplicationRecord
       update(recommended_buy_price: most_recent.buy_average)
     else
       buy.reject_outliers!
-      update(recommended_buy_price: buy.ema)
+      update(recommended_buy_price: buy.ema.to_i)
     end
     sell = price_updates
            .where(created_at: 1.day.ago..DateTime.now)
@@ -160,7 +160,7 @@ class Item < ApplicationRecord
       update(recommended_sell_price: most_recent.sell_average)
     else
       sell.reject_outliers!
-      update(recommended_sell_price: sell.ema)
+      update(recommended_sell_price: sell.ema.to_i)
     end
     # rescue => e
     #   p e
