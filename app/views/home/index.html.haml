@@ -14,6 +14,8 @@
             )
           - else
             Random Items
+          %span.right
+            = link_to 'Refresh', ''
         %ul.collapsible.popout{'data-collapsible': 'accordion'}
           - if @items.empty?
             Sorry, nothing found :(
