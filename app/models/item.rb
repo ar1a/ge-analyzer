@@ -11,7 +11,7 @@ class Item < ApplicationRecord
   scope :most_traded, lambda {
     where('abs(margin) >= 4')
       .order('(buying_rate + selling_rate) desc')
-      .limit(50)
+      .limit(100)
   }
 
   def roi
