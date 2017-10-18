@@ -205,8 +205,9 @@ class Item < ApplicationRecord
     update_ema
     update_roi(price_updates.last.roi)
     update_margin
-  rescue
+  rescue => e
     logger.info "get_past_month failed for #{name} (id: #{runescape_id})"
+    logger.debug e
     return "RSBuddy api broken, couldn't refresh"
   end
 
