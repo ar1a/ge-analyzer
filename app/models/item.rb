@@ -9,7 +9,8 @@ class Item < ApplicationRecord
   }
 
   scope :most_traded, lambda {
-    order('(buying_rate + selling_rate) desc')
+    where('abs(margin) >= 4')
+      .order('(buying_rate + selling_rate) desc')
       .limit(50)
   }
 
