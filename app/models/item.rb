@@ -115,7 +115,7 @@ class Item < ApplicationRecord
   end
 
   def update_roi(other)
-    roi = margin / recommended_buy_price
+    roi = margin.abs / recommended_buy_price
     raise 'hit the rescue nigga' if roi.nan? || roi.infinite?
     update(roi: roi)
   rescue
