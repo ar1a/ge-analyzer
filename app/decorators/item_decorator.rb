@@ -14,6 +14,10 @@ class ItemDecorator < ApplicationDecorator
     format_gp(object.margin.abs)
   end
 
+  def updated
+    "#{h.time_ago_in_words(object.updated_at)} ago"
+  end
+
   def roi_raw
     return '0 %' unless valid?
     roi = object.roi.round 4
