@@ -24,6 +24,7 @@ class PriceUpdate < ApplicationRecord
     # Parallel.each(Item.all) do |i|
     Item.all.each do |i|
       begin
+        puts 'start'
         thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
         update = i.price_updates.build
         update.buy_average = thing['overall'].to_i
