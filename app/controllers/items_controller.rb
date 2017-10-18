@@ -57,8 +57,12 @@ class ItemsController < ApplicationController
   end
 
   def refresh
-    @item.get_past_month
-    redirect_to item_path(@item.runescape_id), alert: 'Item updated! Cooldown: 1 hour'
+    a = @item.get_past_month
+    if a.class == "String"
+      redirect_to item_path(@item.runescape_id), alert: a
+    else
+      redirect_to item_path(@item.runescape_id), alert: 'Item updated! Cooldown: 1 hour'
+    end
   end
 
   private

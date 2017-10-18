@@ -171,7 +171,8 @@ class Item < ApplicationRecord
     return if timed_out? && !force
     return if recursion > 15
     time = (DateTime.now - 30).strftime('%Q')
-    data = JSON.parse RestClient.get("https://api.rsbuddy.com/grandExchange?a=graph&g=30&start=#{time}&i=#{runescape_id}").body
+    clnt = HTTPClient.new
+    data = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=graph&g=30&start=#{time}&i=#{runescape_id}")
     # TODO: Somehow fix this bug?
     # If the first entry is new-ish, retry the get
     # The rsbuddy api only seems to return it for the past week or so sometimes
@@ -204,6 +205,9 @@ class Item < ApplicationRecord
     update_ema
     update_roi(price_updates.last.roi)
     update_margin
+  rescue
+    logger.info "get_past_month failed for #{name} (id: #{runescape_id})"
+    return "RSBuddy api broken, couldn't refresh"
   end
 
   def timed_out?
