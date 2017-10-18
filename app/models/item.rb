@@ -4,9 +4,8 @@ class Item < ApplicationRecord
   scope :positive_roi, lambda {
     where('roi > 0') # profits
       .where('selling_rate > 30') # Actually traded
-      .where('buying_rate > 30')
-      .where('recommended_buy_price > 2000') # not 20gp herbs or 5gp tinderboxes
-      .where('abs(margin) > ? OR roi > ?', 3_000, 0.05) # Either has a high margin or good ROI
+      .where('recommended_buy_price > 1000') # not 20gp herbs or 5gp tinderboxes
+      .where('abs(margin) > ? OR roi > ?', 300, 0.03) # Either has a high margin or good ROI
   }
 
   def roi
