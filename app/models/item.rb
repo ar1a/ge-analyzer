@@ -189,6 +189,9 @@ class Item < ApplicationRecord
       p = price_updates.build
       p.buy_average = entry['sellingPrice'].to_i
       p.sell_average = entry['buyingPrice'].to_i
+      if p.buy_average > p.sell_average
+        p.buy_average, p.sell_average = p.sell_average, p.buy_average
+      end
       p.overall_average = entry['overallPrice'].to_i
       p.created_at = DateTime.strptime(entry['ts'].to_s, '%Q')
       p.roi = if p.buy_average <= 0
