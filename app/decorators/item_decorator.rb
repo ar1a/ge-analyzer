@@ -11,7 +11,7 @@ class ItemDecorator < ApplicationDecorator
   #   end
   def margin
     return '- gp' unless valid?
-    format_gp(object.margin)
+    format_gp(object.margin.abs)
   end
 
   def roi_raw
