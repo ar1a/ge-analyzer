@@ -27,9 +27,12 @@ class PriceUpdate < ApplicationRecord
         puts "Worker: #{Parallel.worker_number}"
         thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
         update = i.price_updates.build
-        update.buy_average = thing['overall'].to_i
+        update.buy_average = thing['selling'].to_i
         update.sell_average = thing['buying'].to_i
-        update.overall_average = thing['selling'].to_i
+        if update.buy_average > update.sell_average
+          update.buy_average, update.sell_average = update.sell_average, update.buy_average
+        end
+        update.overall_average = thing['overall'].to_i
         update.roi = if update.buy_average <= 0
                        0
                      else
