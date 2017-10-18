@@ -23,6 +23,7 @@ class PriceUpdate < ApplicationRecord
     clnt = HTTPClient.new
     # Parallel.each(Item.all) do |i|
     Item.all.each do |i|
+      begin
         thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
         update = i.price_updates.build
         update.buy_average = thing['overall'].to_i
@@ -36,14 +37,20 @@ class PriceUpdate < ApplicationRecord
         i.update_ema
         i.update_roi(update.roi)
         i.update_margin
-        time = (DateTime.now - 1).strftime('%Q')
-        puts "graph time"
-        thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=graph&i=#{i.runescape_id}&start=#{time}&g=1440")
-        p "i: #{i.name} #{i.runescape_id}"
-        thing = thing[0] if thing.class == Array
-        next if thing.nil?
-        i.update(buying_rate: thing['buyingCompleted'].to_i,
-          selling_rate: thing['sellingCompleted'].to_i)
+        # time = (DateTime.now - 1).strftime('%Q')
+        # puts "graph time"
+        # thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=graph&i=#{i.runescape_id}&start=#{time}&g=1440")
+        # p "i: #{i.name} #{i.runescape_id}"
+        # thing = thing[0] if thing.class == Array
+        # next if thing.nil?
+        # i.update(buying_rate: thing['buyingCompleted'].to_i,
+        #          selling_rate: thing['sellingCompleted'].to_i)
+      rescue => e
+        logger.info "Error thrown processing #{i.name} in PriceUpdate#update_all, continuing"
+        logger.debug e
+        clnt = HTTPClient.new
+        next
+      end
     end
     PriceUpdate.connection.reconnect!
   end
