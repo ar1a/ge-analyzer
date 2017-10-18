@@ -26,4 +26,11 @@ class HomeController < ApplicationController
     @items.sort! { |x, y| y.roi.to_f <=> x.roi.to_f }
     @items = ItemDecorator.decorate_collection(@items)
   end
+
+  def most_traded
+    @items = Item.most_traded.to_a
+    @items.sort! { |x, y| y.roi.to_f <=> x.roi.to_f }
+    @items = ItemDecorator.decorate_collection(@items)
+    render 'index'
+  end
 end

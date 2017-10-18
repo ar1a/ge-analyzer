@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'items/:id/week', to: 'items#week', as: 'week'
   get 'items/:id/month', to: 'items#month', as: 'month'
   post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
+  get 'most_traded', to: 'home#most_traded', as: 'most_traded'
   # end
   # root 'welcome#index'
 

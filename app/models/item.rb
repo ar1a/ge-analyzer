@@ -8,6 +8,11 @@ class Item < ApplicationRecord
       .where('abs(margin) > ? OR roi > ?', 300, 0.03) # Either has a high margin or good ROI
   }
 
+  scope :most_traded, lambda {
+    order('(buying_rate + selling_rate) desc')
+      .limit(50)
+  }
+
   def roi
     if (val = self[:roi]).nil? || val.nan?
       0
