@@ -43,13 +43,13 @@
               %a{href: '#daily'} Today
         .card-content
           #daily
-            = line_chart daily_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}} }, legend: true
+            = line_chart daily_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
           #three
-            = line_chart three_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}} }, legend: true
+            = line_chart three_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
           #week
-            = line_chart week_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}} }, legend: true
+            = line_chart week_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
           #month
-            = line_chart month_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}} }, legend: true
+            = line_chart month_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
       - unless @item.timed_out?
         .card-action
           -# = link_to 'Refresh', refresh_path(@item.runescape_id)
