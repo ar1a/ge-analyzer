@@ -38,6 +38,8 @@ class PriceUpdate < ApplicationRecord
         i.update_ema
         i.update_roi(update.roi)
         i.update_margin
+        i.update(buying_rate: thing['buyingQuantity'],
+                 selling_rate: thing['sellingQuantity']) # TODO: remove me
         # time = (DateTime.now - 1).strftime('%Q')
         # thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=graph&i=#{i.runescape_id}&start=#{time}&g=1440")
         # thing = thing[0] if thing.class == Array
