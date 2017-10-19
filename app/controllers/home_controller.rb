@@ -6,8 +6,9 @@ class HomeController < ApplicationController
                arr = []
                # items = Item.all
                items = Item.positive_roi
-               repeat = 0
-               items.sample(10)
+               # repeat = 0
+               # items.sample(10)
+               items
                # loop do
                #   break if arr.count >= 5
                #   break if repeat > 50
@@ -20,9 +21,9 @@ class HomeController < ApplicationController
                # arr
              else
                @search = true
-               @q.result
+               @q.result.first(50)
              end
-    @items = @items.first(50) # limit it
+    @items = @items.first(200) # limit it
     @items.sort! { |x, y| y.roi.to_f * (y.buying_rate + y.selling_rate) <=> x.roi.to_f * (x.buying_rate + y.selling_rate) }
     @items = ItemDecorator.decorate_collection(@items)
   end
