@@ -15,10 +15,11 @@ class Item < ApplicationRecord
   }
 
   scope :top_flips, lambda {
-    where('(buying_rate + selling_rate) > 5')
+    where('buying_rate > 2')
+      .where('selling_rate > 2')
       .order('abs(margin) desc')
       .limit(100)
-   }
+  }
 
   def roi
     if (val = self[:roi]).nil? || val.nan?
