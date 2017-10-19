@@ -22,7 +22,7 @@ class PriceUpdate < ApplicationRecord
   def self.update_all
     clnt = HTTPClient.new
     Parallel.each(Item.all) do |i|
-    # Item.all.each do |i|
+      # Item.all.each do |i|
       begin
         puts "Worker: #{Parallel.worker_number}"
         thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
