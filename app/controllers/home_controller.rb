@@ -34,4 +34,11 @@ class HomeController < ApplicationController
     @items = ItemDecorator.decorate_collection(@items)
     render 'index'
   end
+
+  def top_flips
+    @q = Item.ransack(params[:q])
+    @items = Item.top_flips.to_a
+    @items = ItemDecorator.decorate_collection(@items)
+    render 'index'
+  end
 end
