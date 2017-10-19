@@ -157,7 +157,11 @@ class Item < ApplicationRecord
       update(recommended_buy_price: most_recent.buy_average)
     else
       buy.reject_outliers!
-      update(recommended_buy_price: buy.ema.to_i)
+      e = Ema.new a: 0.3
+      buy.each do |n|
+        e.compute current: n
+      end
+      update(recommended_buy_price: e.last)
     end
     sell = price_updates
            .where(created_at: 1.day.ago..DateTime.now)
@@ -172,7 +176,11 @@ class Item < ApplicationRecord
       update(recommended_sell_price: most_recent.sell_average)
     else
       sell.reject_outliers!
-      update(recommended_sell_price: sell.ema.to_i)
+      e = Ema.new a: 0.3
+      sell.each do |n|
+        e.compute current: n
+      end
+      update(recommended_sell_price: e.last)
     end
     # rescue => e
     #   p e
@@ -181,18 +189,26 @@ class Item < ApplicationRecord
   end
 
   def get_past_month(force = false, recursion = 0)
+    puts "get_past_month on #{name}"
     return if timed_out? && !force
     return if recursion > 15
+    puts 1
     time = (DateTime.now - 30).strftime('%Q')
+    puts 11
     clnt = HTTPClient.new
-    data = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=graph&g=30&start=#{time}&i=#{runescape_id}")
+    puts 111
+    a = clnt.get_content("https://api.rsbuddy.com/grandExchange?a=graph&g=30&start=#{time}&i=#{runescape_id}")
+    data = JSON.parse a
+    puts 1111
     # TODO: Somehow fix this bug?
     # If the first entry is new-ish, retry the get
     # The rsbuddy api only seems to return it for the past week or so sometimes
 
     delta = (DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q'))
+    puts 11111
     if delta < 25
       puts delta.to_i
+      puts "https://api.rsbuddy.com/grandExchange?a=graph&g=30&start=#{time}&i=#{runescape_id}"
       puts 'Get failed! retrying'
       sleep 3
       return get_past_month(force, recursion + 1)

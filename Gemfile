@@ -41,7 +41,7 @@ gem 'materialize-sass', '~> 0.100.2'
 gem 'pry-rails'
 gem 'ransack'
 gem 'rbma'
-gem 'rest-client', '~> 2.0', '>= 2.0.2'
+gem 'faraday'
 gem 'whenever'
 
 # Capistrano
