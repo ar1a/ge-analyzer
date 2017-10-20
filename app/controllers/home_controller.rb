@@ -24,7 +24,7 @@ class HomeController < ApplicationController
                @q.result.first(50)
              end
     @items = @items.first(200) # limit it
-    @items = sort_items_for_user(current_user, items)
+    @items = sort_items_for_user(current_user, @items)
     @items = ItemDecorator.decorate_collection(@items)
   end
 
