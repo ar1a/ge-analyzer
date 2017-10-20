@@ -42,6 +42,7 @@ gem 'materialize-sass', '~> 0.100.2'
 gem 'pry-rails'
 gem 'ransack'
 gem 'rbma'
+gem 'rest-client'
 gem 'storext'
 gem 'whenever'
 

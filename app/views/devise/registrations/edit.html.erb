@@ -1,7 +1,6 @@
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
-
+<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } ) do |f| %>
   <div class="field">
     <%= f.label :username %><br />
     <%= f.text_field :username, autofocus: true %>
@@ -10,6 +9,11 @@
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>
+  </div>
+
+  <div class="field">
+      <%= f.label :sorting_method %><br />
+      <%= select :user, :sorting_method, [['ROI %','roi'], ['Amount traded','traded'], ['Margin', 'margin'], ['Traded and ROI', 'traded_roi']]%>
   </div>
 
   <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>

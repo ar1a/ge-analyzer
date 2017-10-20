@@ -24,7 +24,7 @@ class HomeController < ApplicationController
                @q.result.first(50)
              end
     @items = @items.first(200) # limit it
-    @items.sort! { |x, y| y.roi.to_f * (y.buying_rate + y.selling_rate) <=> x.roi.to_f * (x.buying_rate + y.selling_rate) }
+    @items = sort_items_for_user(current_user, items)
     @items = ItemDecorator.decorate_collection(@items)
   end
 
@@ -41,5 +41,19 @@ class HomeController < ApplicationController
     @items = Item.top_flips.to_a
     @items = ItemDecorator.decorate_collection(@items)
     render 'index'
+  end
+
+  def sort_items_for_user(user, items)
+    user ||= User.new
+    case user.sorting_method
+    when 'roi'
+      items.sort { |x, y| y.roi <=> x.roi }
+    when 'traded'
+      items.sort { |x, y| (y.buying_rate + y.selling_rate) <=> (x.buying_rate + x.selling_rate) }
+    when 'margin'
+      items.sort { |x, y| y.margin <=> x.margin }
+    else # traded_roi
+      items.sort { |x, y| y.roi.to_f * (y.buying_rate + y.selling_rate) <=> x.roi.to_f * (x.buying_rate + y.selling_rate) }
+    end
   end
 end

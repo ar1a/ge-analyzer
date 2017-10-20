@@ -4,6 +4,13 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  include Storext.model
+
+  store_attributes :settings do
+    sorting_method String, default: 'traded_roi'
+  end
+  validates :sorting_method, inclusion: { in: %w[traded_roi traded margin roi] }
+
   attr_accessor :login
 
   validates :username,
