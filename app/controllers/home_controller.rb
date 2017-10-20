@@ -21,7 +21,7 @@ class HomeController < ApplicationController
                # arr
              else
                @search = true
-               @q.result.first(50)
+               @q.result.first(200)
              end
     @items = @items.first(200) # limit it
     @items = sort_items_for_user(current_user, @items)
