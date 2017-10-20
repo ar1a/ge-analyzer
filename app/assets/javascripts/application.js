@@ -39,4 +39,6 @@ $(document).on('turbolinks:load', function(event) {
         ga('set', 'location', event.originalEvent.data.url);
         ga('send', 'pageview');
     }
+
+    $('select').material_select();
 });
