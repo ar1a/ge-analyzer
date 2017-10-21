@@ -111,8 +111,8 @@ class Item < ApplicationRecord
         tmp = []
         a.each do |b|
           sum = b[1].map(&:overall_average).reject(&:zero?)
-          sum_size = sum.size.to_f
-          sum = sum.reduce(:+)
+          sum_size = sum.size.to_f || 1
+          sum = sum.reduce(:+) || 1
           tmp << [b[0], (sum / sum_size).to_i]
         end
         tmp
