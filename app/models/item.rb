@@ -31,7 +31,7 @@ class Item < ApplicationRecord
 
   def recommended_buy_price
     if (val = self[:recommended_buy_price]).nil? || val.nan?
-      0
+      most_recent.buy_average || 0
     else
       val
     end
@@ -39,7 +39,7 @@ class Item < ApplicationRecord
 
   def recommended_sell_price
     if (val = self[:recommended_sell_price]).nil? || val.nan?
-      0
+      most_recent.sell_average || 0
     else
       val
     end
