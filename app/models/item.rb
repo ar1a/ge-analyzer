@@ -110,12 +110,9 @@ class Item < ApplicationRecord
         a = price_updates.group_by { |x| x.created_at.to_date }
         tmp = []
         a.each do |b|
-          sum = b[1].map(&:overall_average).reject(&:zero?)
-          sum_size = sum.size.zero? ? 1 : sum.size.to_f
-          sum = sum.reduce(:+) || 1
-          tmp << [b[0], (sum / sum_size).to_i]
+          tmp << [b[0], (b[1].map(&:overall_average).reduce(:+) / b[1].size.to_f).to_i]
         end
-        tmp
+        tmp.reject{ |x| x[1].zero? }
       end
     end
   end
