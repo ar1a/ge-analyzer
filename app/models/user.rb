@@ -7,7 +7,7 @@ class User < ApplicationRecord
   include Storext.model
 
   store_attributes :settings do
-    sorting_method String, default: 'traded_roi'
+    sorting_method String, default: 'margin'
   end
   validates :sorting_method, inclusion: { in: %w[traded_roi traded margin roi] }
 
