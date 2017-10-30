@@ -21,6 +21,94 @@ class Item < ApplicationRecord
       .limit(100)
   }
 
+  scope :barrows_items, lambda {
+    where(runescape_id: [
+            # Dharok
+            12_877, # Set
+            4718, # Greataxe
+            4716, # Helm
+            4720, # Platebody
+            4722, # Platelegs
+            # Torag
+            12_879, # Set
+            4747, # Hammers
+            4745, # Helm
+            4749, # Platebody
+            4751, # Platelegs
+            # Guthan
+            12_873, # Set
+            4726, # Warspear
+            4724, # Helm
+            4728, # Platebody
+            4730, # Chainskirt
+            # Verac
+            12_875, # Set
+            4755, # Flail
+            4753, # Helm
+            4757, # Brassard
+            4759, # Plateskirt
+            # Karil
+            12_883, # Set
+            4734, # Crossbow
+            4732, # Coif
+            4736, # Leathertop
+            4738, # Leatherskirt
+            # Ahrim
+            12_881, # Set
+            4710, # Staff
+            4708, # Hood
+            4712, # Robetop
+            4714, # Robeskirt
+          ])
+  }
+
+  scope :zulrah, lambda {
+    where(name: [
+            "Zulrah's scales",
+            'Tanzanite fang',
+            'Magic fang',
+            'Serpentine visage',
+            'Uncut onyx',
+            'Dragon med helm',
+            'Dragon halberd',
+            'Law rune',
+            'Death rune',
+            'Chaos rune',
+            'Pure essence',
+            'Toadflax',
+            'Snapdragon',
+            'Dwarf weed',
+            'Torstol',
+            'Flax',
+            'Snakeskin',
+            'Dragon bolt tips',
+            'Yew logs',
+            'Mahogany logs',
+            'Coal',
+            'Runite ore',
+            'Calquat tree seed',
+            'Palm tree seed',
+            'Papaya tree seed',
+            'Magic seed',
+            'Toadflax seed',
+            'Snapdragon seed',
+            'Dwarf weed seed',
+            'Torstol seed',
+            'Crystal seed',
+            'Zul-andra teleport',
+            'Dragon bones',
+            'Coconut',
+            'Grapes',
+            'Battlestaff',
+            'Antidote++(4)',
+            'Manta ray',
+            'Swamp tar',
+            'Crushed nest',
+            'Adamantite bar',
+            'Jar of swamp'
+          ])
+  }
+
   def roi
     if (val = self[:roi]).nil? || val.nan?
       0

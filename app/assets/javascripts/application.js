@@ -41,4 +41,5 @@ $(document).on('turbolinks:load', function(event) {
     }
 
     $('select').material_select();
+    $('.dropdown-btn').dropdown();
 });

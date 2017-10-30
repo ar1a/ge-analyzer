@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
   get 'most_traded', to: 'home#most_traded', as: 'most_traded'
   get 'top_flips', to: 'home#top_flips', as: 'top_flips'
+  get 'barrows_items', to: 'home#barrows_items', as: 'barrows_items'
+  get 'zulrah', to: 'home#zulrah', as: 'zulrah'
   # end
   # root 'welcome#index'
 

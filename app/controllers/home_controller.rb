@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
+  before_action :setup_ransack
   def index
-    @q = Item.ransack(params[:q])
     @items = if params[:q].nil?
                # Item.all.sample(5)
                arr = []
@@ -29,7 +29,6 @@ class HomeController < ApplicationController
   end
 
   def most_traded
-    @q = Item.ransack(params[:q])
     @items = Item.most_traded.to_a
     @items.sort! { |x, y| y.roi.to_f <=> x.roi.to_f }
     @items = ItemDecorator.decorate_collection(@items)
@@ -37,10 +36,28 @@ class HomeController < ApplicationController
   end
 
   def top_flips
-    @q = Item.ransack(params[:q])
     @items = Item.top_flips.to_a
     @items = ItemDecorator.decorate_collection(@items)
     render 'index'
+  end
+
+  def sort_decorate_render_groups
+    @items = sort_items_for_user(current_user, @items)
+    @items = ItemDecorator.decorate_collection @items
+    render 'index'
+  end
+  def barrows_items
+    @items = Item.barrows_items.to_a
+    sort_decorate_render_groups
+  end
+
+  def zulrah
+    @items = Item.zulrah.to_a
+    sort_decorate_render_groups
+  end
+
+  def setup_ransack
+    @q = Item.ransack(params[:q])
   end
 
   def sort_items_for_user(user, items)

@@ -1,3 +1,8 @@
+%ul#group-dropdown.dropdown-content
+  %li
+    = link_to 'Barrows Items', barrows_items_path
+  %li
+    = link_to 'Zulrah', zulrah_path
 .row
   .col.s12.center
     %h2 Home
@@ -15,7 +20,11 @@
           - else
             Items
           %span.right
-            = link_to 'Refresh', ''
+            %a.dropdown-btn.btn.green.darken-2{href: '#', 'data-activates' => 'group-dropdown'}
+              Groups
+              %i.material-icons.right arrow_drop_down
+            = link_to 'Refresh', '', class: 'btn green darken-2'
+        %br
         %ul.collapsible.popout{'data-collapsible': 'accordion'}
           - if @items.empty?
             Sorry, nothing found :(
