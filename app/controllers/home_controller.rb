@@ -30,9 +30,7 @@ class HomeController < ApplicationController
 
   def most_traded
     @items = Item.most_traded.to_a
-    @items.sort! { |x, y| y.roi.to_f <=> x.roi.to_f }
-    @items = ItemDecorator.decorate_collection(@items)
-    render 'index'
+    sort_decorate_render_groups
   end
 
   def top_flips
