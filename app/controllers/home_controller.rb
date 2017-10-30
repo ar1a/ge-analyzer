@@ -44,6 +44,7 @@ class HomeController < ApplicationController
     @items = ItemDecorator.decorate_collection @items
     render 'index'
   end
+
   def barrows_items
     @items = Item.barrows_items.to_a
     sort_decorate_render_groups
