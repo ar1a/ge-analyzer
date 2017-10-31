@@ -55,6 +55,11 @@ class HomeController < ApplicationController
     sort_decorate_render_groups
   end
 
+  def potions
+    @items = Item.potions.to_a
+    sort_decorate_render_groups
+  end
+
   def setup_ransack
     @q = Item.ransack(params[:q])
   end

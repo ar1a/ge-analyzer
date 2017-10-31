@@ -109,6 +109,49 @@ class Item < ApplicationRecord
           ])
   }
 
+  scope :potions, lambda {
+    where(name: [
+            'Attack potion(4)',
+            'Antipoison(4)',
+            'Relicym\'s balm(4)',
+            'Strength potion(4)',
+            'Serum 207(4)',
+            'Guthix rest tea(4)',
+            'Restore potion(4)',
+            'Guthix balance(4)',
+            'Blamish oil(4)',
+            'Energy potion(4)',
+            'Defence potion(4)',
+            'Agility potion(4)',
+            'Combat potion(4)',
+            'Prayer potion(4)',
+            'Super attack(4)',
+            'Superantipoison(4)',
+            'Fishing potion(4)',
+            'Super energy potion(4)',
+            'Hunter potion(4)',
+            'Super strength(4)',
+            'Weapon poison(4)',
+            'Super restore(4)',
+            'Sanfew serum(4)',
+            'Super defence potion(4)',
+            'Antidote+(4)',
+            'Anti-fire potion(4)',
+            'Ranging potion(4)',
+            'Weapon poison+(4)',
+            'Magic potion(4)',
+            'Stamina potion(4)',
+            'Zamorak brew(4)',
+            'Antidote++(4)',
+            'Saradomin brew(4)',
+            'Weapon poison++(4)',
+            'Extended antifire(4)',
+            'Anti-venom(4)',
+            'Super combat potion(4)',
+            'Anti-venom+(4)'
+          ])
+  }
+
   def roi
     if (val = self[:roi]).nil? || val.nan?
       0

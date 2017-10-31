@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'top_flips', to: 'home#top_flips', as: 'top_flips'
   get 'barrows_items', to: 'home#barrows_items', as: 'barrows_items'
   get 'zulrah', to: 'home#zulrah', as: 'zulrah'
+  get 'potions', to: 'home#potions', as: 'potions'
   # end
   # root 'welcome#index'
 
