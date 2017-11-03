@@ -7,12 +7,14 @@ Rails.application.routes.draw do
   get 'items/:id/week', to: 'items#week', as: 'week'
   get 'items/:id/month', to: 'items#month', as: 'month'
   post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
-  get 'most_traded', to: 'home#most_traded', as: 'most_traded'
-  get 'top_flips', to: 'home#top_flips', as: 'top_flips'
-  get 'barrows_items', to: 'home#barrows_items', as: 'barrows_items'
-  get 'zulrah', to: 'home#zulrah', as: 'zulrah'
-  get 'potions', to: 'home#potions', as: 'potions'
-  get 'ores', to: 'home#ores', as: 'ores'
+  scope :groups do
+    get 'most_traded', to: 'home#most_traded', as: 'most_traded'
+    get 'top_flips', to: 'home#top_flips', as: 'top_flips'
+    get 'barrows_items', to: 'home#barrows_items', as: 'barrows_items'
+    get 'zulrah', to: 'home#zulrah', as: 'zulrah'
+    get 'potions', to: 'home#potions', as: 'potions'
+    get 'ores', to: 'home#ores', as: 'ores'
+  end
   # end
   # root 'welcome#index'
 
