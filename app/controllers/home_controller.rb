@@ -60,6 +60,11 @@ class HomeController < ApplicationController
     sort_decorate_render_groups
   end
 
+  def ores
+    @items = Item.ores.to_a
+    sort_decorate_render_groups
+  end
+
   def setup_ransack
     @q = Item.ransack(params[:q])
   end

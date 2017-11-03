@@ -152,6 +152,30 @@ class Item < ApplicationRecord
           ])
   }
 
+  scope :ores, lambda {
+    where(name: [
+            'Clay',
+            'Rune essence',
+            'Copper ore',
+            'Tin ore',
+            'Limestone',
+            'Blurite ore',
+            'Iron ore',
+            'Elemental ore',
+            'Silver ore',
+            'Pure essence',
+            'Coal ore',
+            'Sandstone',
+            'Gold ore',
+            'Granite',
+            'Mithril ore',
+            'Lovakite ore',
+            'Adamantite ore',
+            'Runite ore',
+            'Amethyst'
+          ])
+  }
+
   def roi
     if (val = self[:roi]).nil? || val.nan?
       0

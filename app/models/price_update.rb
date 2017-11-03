@@ -21,7 +21,6 @@ class PriceUpdate < ApplicationRecord
   # end
   def self.update_all
     clnt = HTTPClient.new
-    # Parallel.each(Item.all) do |i|
     Item.all.each do |i|
       begin
         puts "Worker: #{Parallel.worker_number}"
@@ -44,12 +43,6 @@ class PriceUpdate < ApplicationRecord
         i.update_margin
         i.update(buying_rate: thing['buyingQuantity'],
                  selling_rate: thing['sellingQuantity']) # TODO: remove me
-        # time = (DateTime.now - 1).strftime('%Q')
-        # thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=graph&i=#{i.runescape_id}&start=#{time}&g=1440")
-        # thing = thing[0] if thing.class == Array
-        # next if thing.nil?
-        # i.update(buying_rate: thing['buyingCompleted'].to_i,
-        #          selling_rate: thing['sellingCompleted'].to_i)
       rescue => e
         logger.info "Error thrown processing #{i.name} in PriceUpdate#update_all, continuing"
         logger.debug e

@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get 'barrows_items', to: 'home#barrows_items', as: 'barrows_items'
   get 'zulrah', to: 'home#zulrah', as: 'zulrah'
   get 'potions', to: 'home#potions', as: 'potions'
+  get 'ores', to: 'home#ores', as: 'ores'
   # end
   # root 'welcome#index'
 
