@@ -20,36 +20,41 @@ class PriceUpdate < ApplicationRecord
   #   end
   # end
   def self.update_all
-    clnt = HTTPClient.new
-    Item.all.each do |i|
-      begin
-        puts "Worker: #{Parallel.worker_number}"
-        thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
-        update = i.price_updates.build
-        update.buy_average = thing['selling'].to_i
-        update.sell_average = thing['buying'].to_i
-        if update.buy_average > update.sell_average
-          update.buy_average, update.sell_average = update.sell_average, update.buy_average
+    Timeout.timeout(20 * 60) do
+      clnt = HTTPClient.new
+      Item.all.each do |i|
+        begin
+          puts "Worker: #{Parallel.worker_number}"
+          thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
+          update = i.price_updates.build
+          update.buy_average = thing['selling'].to_i
+          update.sell_average = thing['buying'].to_i
+          if update.buy_average > update.sell_average
+            update.buy_average, update.sell_average = update.sell_average, update.buy_average
+          end
+          update.overall_average = thing['overall'].to_i
+          update.roi = if update.buy_average <= 0
+                         0
+                       else
+                         (update.sell_average.to_f - update.buy_average.to_f) / update.overall_average.to_f
+                       end
+          update.save
+          i.update_ema
+          i.update_roi(update.roi)
+          i.update_margin
+          i.update(buying_rate: thing['buyingQuantity'],
+                   selling_rate: thing['sellingQuantity']) # TODO: remove me
+        rescue => e
+          logger.info "Error thrown processing #{i.name} in PriceUpdate#update_all, continuing"
+          logger.debug e
+          clnt = HTTPClient.new
+          next
         end
-        update.overall_average = thing['overall'].to_i
-        update.roi = if update.buy_average <= 0
-                       0
-                     else
-                       (update.sell_average.to_f - update.buy_average.to_f) / update.overall_average.to_f
-                     end
-        update.save
-        i.update_ema
-        i.update_roi(update.roi)
-        i.update_margin
-        i.update(buying_rate: thing['buyingQuantity'],
-                 selling_rate: thing['sellingQuantity']) # TODO: remove me
-      rescue => e
-        logger.info "Error thrown processing #{i.name} in PriceUpdate#update_all, continuing"
-        logger.debug e
-        clnt = HTTPClient.new
-        next
       end
+      PriceUpdate.connection.reconnect!
     end
-    PriceUpdate.connection.reconnect!
+  rescue Timeout::Error => e
+    logger.info 'PriceUpdate#update_all timed out after 20 minutes'
+    logger.debug e
   end
 end
