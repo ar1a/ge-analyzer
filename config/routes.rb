@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   # authenticated :user do
   root 'home#index'
-  resources :items, only: %i[show]
   get 'items/:id/daily', to: 'items#daily', as: 'daily'
   get 'items/:id/three', to: 'items#three', as: 'three'
   get 'items/:id/week', to: 'items#week', as: 'week'
   get 'items/:id/month', to: 'items#month', as: 'month'
   post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
+  get 'items/search', to: 'home#search', as: 'items_search'
+  resources :items, only: %i[show]
   scope :groups do
     get 'most_traded', to: 'home#most_traded', as: 'most_traded'
     get 'top_flips', to: 'home#top_flips', as: 'top_flips'

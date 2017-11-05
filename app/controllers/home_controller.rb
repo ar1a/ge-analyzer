@@ -1,31 +1,20 @@
 class HomeController < ApplicationController
-  before_action :setup_ransack
   def index
-    @items = if params[:q].nil?
-               # Item.all.sample(5)
-               arr = []
-               # items = Item.all
-               items = Item.positive_roi
-               # repeat = 0
-               # items.sample(10)
-               items
-               # loop do
-               #   break if arr.count >= 5
-               #   break if repeat > 50
-               #   repeat += 1
-               #   i = items.sample
-               #   next if i.nil?
-               #   # TODO: make these options?
-               #   arr << i
-               # end
-               # arr
-             else
-               @search = true
-               @q.result.first(200)
-             end
+    @items = Item.positive_roi
     @items = @items.first(200) # limit it
     @items = sort_items_for_user(current_user, @items)
     @items = ItemDecorator.decorate_collection(@items)
+  end
+
+  def search
+    name = params.require(:item).permit(:name)[:name]
+    @search = true
+    @items = Item.search name,
+                         fields: [:name],
+                         match: :word_start,
+                         misspellings: { below: 5 }
+    @items = @items.first 200
+    sort_decorate_render_groups
   end
 
   def most_traded
@@ -63,10 +52,6 @@ class HomeController < ApplicationController
   def ores
     @items = Item.ores.to_a
     sort_decorate_render_groups
-  end
-
-  def setup_ransack
-    @q = Item.ransack(params[:q])
   end
 
   def sort_items_for_user(user, items)

@@ -21,6 +21,7 @@ group :development, :test do
 end
 group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rbtrace'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'web-console', '>= 3.3.0'
@@ -40,9 +41,10 @@ gem 'httpclient'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'materialize-sass', '~> 0.100.2'
 gem 'pry-rails'
-gem 'ransack'
 gem 'rbma'
 gem 'rest-client'
+gem 'searchkick'
+gem 'simple_form'
 gem 'storext'
 gem 'whenever'
 

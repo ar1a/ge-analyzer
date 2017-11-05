@@ -1,7 +1,14 @@
-- unless @q.nil?
-  .col.s12
-    .card
-      .card-content
-        %span.card-title Search
-        = search_form_for @q, url: root_path do |f|
-          = f.search_field :name_cont, placeholder: 'Search...'
+-# - unless @q.nil?
+-#   .col.s12
+-#     .card
+-#       .card-content
+-#         %span.card-title Search
+-#         = search_form_for @q, url: root_path do |f|
+-#           = f.search_field :name_cont, placeholder: 'Search...'
+.col.s12
+  .card
+    .card-content
+      %span.card-title Search
+      = simple_form_for :item, url: items_search_path, method: :get do |f|
+        .input-field
+          = f.input :name, required: false

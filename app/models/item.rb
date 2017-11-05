@@ -1,6 +1,8 @@
 class Item < ApplicationRecord
   has_many :price_updates
 
+  searchkick word_start: [:name]
+
   scope :positive_roi, lambda {
     where('roi > 0') # profits
       .where('buying_rate > 5 AND selling_rate > 5 AND (buying_rate + selling_rate) > 30') # Actually traded
