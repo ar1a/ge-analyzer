@@ -20,7 +20,7 @@ class PriceUpdate < ApplicationRecord
   #   end
   # end
   def self.update_all
-    Timeout.timeout(20 * 60) do
+    Timeout.timeout(40 * 60) do
       clnt = HTTPClient.new
       # Item.all.each do |i|
       Parallel.each Item.all do |i|
@@ -55,7 +55,7 @@ class PriceUpdate < ApplicationRecord
       PriceUpdate.connection.reconnect!
     end
   rescue Timeout::Error => e
-    logger.info 'PriceUpdate#update_all timed out after 20 minutes'
+    logger.info 'PriceUpdate#update_all timed out after 40 minutes'
     logger.debug e
   end
 end
