@@ -19,7 +19,8 @@
 @import "https://fonts.googleapis.com/icon?family=Material+Icons";
 
 body {
-    background-color: #eeeeee;
+    /* background-color: #eeeeee; */
+    @extend .grey, .lighten-5;
 }
 
 // navbar
