@@ -286,7 +286,9 @@ class Item < ApplicationRecord
     roi = margin.abs / recommended_buy_price
     raise 'hit the rescue nigga' if roi.nan? || roi.infinite?
     update(roi: roi)
-  rescue
+  rescue => e
+    logger.debug e
+    logger.info "Item: #{name} roi failed, resorting to most recent price roi"
     update(roi: other)
   end
 
