@@ -41,8 +41,8 @@ class PriceUpdate < ApplicationRecord
                        end
           update.save
           i.update_ema
-          i.update_roi(update.roi)
           i.update_margin
+          i.update_roi(update.roi)
           i.update(buying_rate: thing['buyingQuantity'],
                    selling_rate: thing['sellingQuantity']) # TODO: remove me
         rescue => e
