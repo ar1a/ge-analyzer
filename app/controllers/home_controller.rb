@@ -39,6 +39,11 @@ class HomeController < ApplicationController
     sort_decorate_render_groups
   end
 
+  def food
+    @items = Item.food.to_a
+    sort_decorate_render_groups
+  end
+
   def zulrah
     @items = Item.zulrah.to_a
     sort_decorate_render_groups

@@ -23,6 +23,55 @@ class Item < ApplicationRecord
       .limit(100)
   }
 
+  scope :food, lambda {
+    where(name: [
+            'Shrimp',
+            'Cooked chicken',
+            'Sardine',
+            'Cooked meat',
+            'Bread',
+            'Herring',
+            'Mackerel',
+            'Trout',
+            'Cod',
+            'Pike',
+            'Roast beast meat',
+            'Pineapple punch',
+            'Salmon',
+            'Tuna',
+            'Jug of wine',
+            'Rainbow fish',
+            'Stew',
+            'Cake',
+            'Meat pie',
+            'Lobster',
+            'Bass',
+            'Plain pizza',
+            'Swordfish',
+            'Potato with butter',
+            'Apple pie',
+            'Chocolate cake',
+            "Tangled toads' legs",
+            'Potato with cheese',
+            'Meat pizza',
+            'Monkfish',
+            'Anchovy pizza',
+            'Cooked karambwan',
+            'Curry',
+            'Ugthanki kebab',
+            'Mushroom potato',
+            'Shark',
+            'Sea turtle',
+            'Pineapple pizza',
+            'Manta ray',
+            'Tuna potato',
+            'Dark crab',
+            'Anglerfish',
+            'Basket of strawberries',
+            'Saradomin brew(4)'
+          ])
+  }
+
   scope :barrows_items, lambda {
     where(runescape_id: [
             # Dharok
@@ -269,7 +318,7 @@ class Item < ApplicationRecord
         a.each do |b|
           tmp << [b[0], (b[1].map(&:overall_average).reduce(:+) / b[1].size.to_f).to_i]
         end
-        tmp.reject{ |x| x[1].zero? }
+        tmp.reject { |x| x[1].zero? }
       end
     end
   end
@@ -363,7 +412,7 @@ class Item < ApplicationRecord
     # The rsbuddy api only seems to return it for the past week or so sometimes
 
     delta = (DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q'))
-    puts 11111
+    puts 11_111
     if delta < 25
       puts delta.to_i
       puts "https://api.rsbuddy.com/grandExchange?a=graph&g=30&start=#{time}&i=#{runescape_id}"
