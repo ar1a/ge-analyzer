@@ -2,6 +2,13 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  before_filter :check_rack_mini_profiler
+  def check_rack_mini_profiler
+    if current_user.username == 'ar1a' && params[:rmp]
+      Rack::MiniProfiler.authorize_request
+    end
+  end
+
   protected
 
   def configure_permitted_parameters
