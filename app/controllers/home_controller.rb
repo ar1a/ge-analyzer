@@ -60,6 +60,7 @@ class HomeController < ApplicationController
   end
 
   def sort_by
+    return redirect_to root_path, notice: 'You must be signed in to do this!' unless user_signed_in?
     current_user.update(sorting_method: params[:method])
     redirect_back fallback_location: root_path
   end
