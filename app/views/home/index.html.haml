@@ -13,6 +13,15 @@
     = link_to 'Ores', ores_path
   %li
     = link_to 'Food', food_path
+%ul#sort-dropdown.dropdown-content
+  %li
+    = link_to 'Traded', items_sort_by_path('traded'), method: :put
+  %li
+    = link_to 'ROI %', items_sort_by_path('roi'), method: :put
+  %li
+    = link_to 'Margin', items_sort_by_path('margin'), method: :put
+  %li
+    = link_to 'Traded and ROI', items_sort_by_path('traded_roi'), method: :put
 .row
   = render 'search'
   .col.s12
@@ -29,6 +38,9 @@
           %span.right
             %a.dropdown-btn.btn.green{href: '#', 'data-activates' => 'group-dropdown'}
               Groups
+              %i.material-icons.right arrow_drop_down
+            %a.dropdown-btn.btn.green{href: '#', 'data-activates' => 'sort-dropdown'}
+              Sort by
               %i.material-icons.right arrow_drop_down
             = link_to 'Refresh', '', class: 'btn green'
         %br

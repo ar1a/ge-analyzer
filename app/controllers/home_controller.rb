@@ -59,6 +59,11 @@ class HomeController < ApplicationController
     sort_decorate_render_groups
   end
 
+  def sort_by
+    current_user.update(sorting_method: params[:method])
+    redirect_back fallback_location: root_path
+  end
+
   def sort_items_for_user(user, items)
     user ||= User.new
     case user.sorting_method

@@ -15,11 +15,6 @@
                 <%= f.email_field :email, autofocus: true %>
             </div>
 
-            <div class="field">
-                <%= f.label :sorting_method %><br />
-                <%= select :user, :sorting_method, [['ROI %','roi'], ['Amount traded','traded'], ['Margin', 'margin'], ['Traded and ROI', 'traded_roi']]%>
-            </div>
-
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
                 <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
             <% end %>

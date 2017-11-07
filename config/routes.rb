@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'items/:id/month', to: 'items#month', as: 'month'
   post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
   get 'items/search', to: 'home#search', as: 'items_search'
+  put 'items/sort_by/:method', to: 'home#sort_by', as: 'items_sort_by'
   resources :items, only: %i[show]
   scope :groups do
     get 'most_traded', to: 'home#most_traded', as: 'most_traded'
