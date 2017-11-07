@@ -22,6 +22,8 @@ class User < ApplicationRecord
 
   validate :validate_username
 
+  before_validation :remove_blank_username
+
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
     if (login = conditions.delete(:login))
@@ -33,6 +35,10 @@ class User < ApplicationRecord
   end
 
   private
+
+  def remove_blank_username
+    self.username = username_was if username.blank?
+  end
 
   def validate_username
     errors.add(:username, :invalid) if User.where(email: username).exists?

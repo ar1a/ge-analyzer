@@ -4,6 +4,7 @@
             Edit <%= resource_name.to_s.humanize %>
         </span>
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put } ) do |f| %>
+            <%= devise_error_messages! %>
             <div class="field">
                 <%= f.label :username %><br />
                 <%= f.text_field :username, autofocus: true %>
