@@ -1,7 +1,7 @@
 = render 'home/search'
 .row
   .col.s12
-    %h4#item-title
+    %h4#item-title{title: "Last updated #{@item.updated}"}
       = @item.name
       %img#item-icon.right.img-responsive{src: @item.icon_link, alt: @item.name}
 .row.card-balance
