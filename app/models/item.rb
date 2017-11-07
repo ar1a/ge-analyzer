@@ -8,14 +8,12 @@ class Item < ApplicationRecord
       .where('buying_rate > 5 AND selling_rate > 5 AND (buying_rate + selling_rate) > 30') # Actually traded
       .where('recommended_buy_price > 1000') # not 20gp herbs or 5gp tinderboxes
       .where('abs(margin) > ? OR roi > ?', 300, 0.03) # Either has a high margin or good ROI
-      .preload(:price_updates)
   }
 
   scope :most_traded, lambda {
     # where('abs(margin) >= 4')
     order('(buying_rate + selling_rate) desc')
       .limit(100)
-      .preload(:price_updates)
   }
 
   scope :top_flips, lambda {
@@ -23,13 +21,11 @@ class Item < ApplicationRecord
       .where('selling_rate > 2')
       .order('abs(margin) desc')
       .limit(100)
-      .preload(:price_updates)
   }
 
   scope :free, lambda {
     positive_roi
       .where('members = FALSE')
-      .preload(:price_updates)
   }
 
   scope :food, lambda {
@@ -79,7 +75,6 @@ class Item < ApplicationRecord
             'Basket of strawberries',
             'Saradomin brew(4)'
           ])
-      .preload(:price_updates)
   }
 
   scope :barrows_items, lambda {
@@ -121,7 +116,6 @@ class Item < ApplicationRecord
             4712, # Robetop
             4714, # Robeskirt
           ])
-      .preload(:price_updates)
   }
 
   scope :zulrah, lambda {
@@ -169,7 +163,6 @@ class Item < ApplicationRecord
             'Adamantite bar',
             'Jar of swamp'
           ])
-      .preload(:price_updates)
   }
 
   scope :potions, lambda {
@@ -213,7 +206,6 @@ class Item < ApplicationRecord
             'Super combat potion(4)',
             'Anti-venom+(4)'
           ])
-      .preload(:price_updates)
   }
 
   scope :ores, lambda {
@@ -238,7 +230,6 @@ class Item < ApplicationRecord
             'Runite ore',
             'Amethyst'
           ])
-      .preload(:price_updates)
   }
 
   def roi

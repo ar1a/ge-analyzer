@@ -10,7 +10,6 @@ class HomeController < ApplicationController
     name = params.require(:item).permit(:name)[:name]
     @search = true
     @items = Item.search name,
-                         includes: [:price_updates],
                          fields: [:name],
                          match: :word_start,
                          misspellings: { below: 5 }
