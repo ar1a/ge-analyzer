@@ -18,5 +18,5 @@ $(document).on 'turbolinks:load', ->
       backToTop()
     $('#back-to-top').on 'click', (e) ->
       e.preventDefault()
-      $('html,body').animate { scrollTop: 0 }, 700
+      $('html,body').animate { scrollTop: 0 }, 375, 'easeOutExpo'
 
