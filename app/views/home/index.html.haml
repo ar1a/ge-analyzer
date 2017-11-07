@@ -52,3 +52,7 @@
             %li.collection-item Sorry, nothing found :(
           - else
             = render partial: 'preview', collection: @items, cached: true
+
+.fixed-action-btn
+  %a#back-to-top.btn-floating.btn-large.red.scale-transition
+    %i.large.material-icons keyboard_arrow_up
