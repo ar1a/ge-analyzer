@@ -14,7 +14,9 @@ class HomeController < ApplicationController
                          match: :word_start,
                          misspellings: { below: 5 }
     @items = @items.first 200
-    sort_decorate_render_groups
+    @items = sort_items_for_user(current_user, @items)
+    @items = ItemDecorator.decorate_collection @items
+    render 'index'
   end
 
   def most_traded
