@@ -11,10 +11,10 @@
         -# %span.card-title Price
         .flow-text
           %strong Buy:
-          = @item.recommended_buy
+          %span{ title: @item.buy_price }= @item.recommended_buy
           %br
           %strong Sell:
-          = @item.recommended_sell
+          %span{ title: @item.sell_price }= @item.recommended_sell
   .col.l3.m6.s12
     .card.yellow.lighten-1.fill
       .card-content
