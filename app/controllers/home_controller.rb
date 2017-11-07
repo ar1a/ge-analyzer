@@ -29,6 +29,7 @@ class HomeController < ApplicationController
   end
 
   def sort_decorate_render_groups
+    @items = @items.reject { |x| x.roi > 10 }
     @items = sort_items_for_user(current_user, @items)
     @items = ItemDecorator.decorate_collection @items
     render 'index'
