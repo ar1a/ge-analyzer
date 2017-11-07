@@ -365,6 +365,8 @@ class Item < ApplicationRecord
     p 'buy'
     puts buy.count
     p buy
+    buy_ema = 0
+    sell_ema = 0
     if buy.count <= 3
       update(recommended_buy_price: most_recent.buy_average)
     else
@@ -373,7 +375,8 @@ class Item < ApplicationRecord
       buy.each do |n|
         e.compute current: n
       end
-      update(recommended_buy_price: e.last)
+      buy_ema = e.last
+      # update(recommended_buy_price: e.last)
     end
     sell = price_updates
            .where(created_at: 1.day.ago..DateTime.now)
@@ -392,12 +395,15 @@ class Item < ApplicationRecord
       sell.each do |n|
         e.compute current: n
       end
-      update(recommended_sell_price: e.last)
+      # update(recommended_sell_price: e.last)
+      sell_ema = e.last
     end
-    # rescue => e
-    #   p e
-    #   update(recommended_buy_price: most_recent.buy_average,
-    #          recommended_sell_price: most_recent.sell_average)
+    if sell_ema > 0 && buy_ema > 0
+      if buy_ema > sell_ema
+        buy_ema, sell_ema = sell_ema, buy_ema
+        update(recommended_buy_price: buy_ema, recommended_sell_price: sell_ema)
+      end
+    end
   end
 
   def get_past_month(force = false, recursion = 0)
