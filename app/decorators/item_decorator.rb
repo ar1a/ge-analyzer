@@ -11,7 +11,7 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def roi_raw
-    return '0 %' unless valid?
+    return '0%' unless valid?
     roi = object.roi.round 4
     "#{roi * 100}%"
   end

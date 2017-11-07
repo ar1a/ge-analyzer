@@ -27,6 +27,7 @@ group :development do
   gem 'web-console', '>= 3.3.0'
   gem 'bullet'
   gem 'rack-mini-profiler', require: false
+  gem 'traceroute'
 end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
