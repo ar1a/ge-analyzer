@@ -24,7 +24,8 @@ class Item < ApplicationRecord
   }
 
   scope :free, lambda {
-    where('members = FALSE')
+    positive_roi
+      .where('members = FALSE')
   }
 
   scope :food, lambda {
