@@ -53,7 +53,6 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def margin_style
-    return 'red-text' if object.roi.nil?
     object.margin > 0 ? 'green-text' : 'red-text'
   end
 end
