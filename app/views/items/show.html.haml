@@ -1,57 +1,57 @@
 = render 'home/search'
 .row
   .col.s12
-    .card
+    %h4
+      = @item.name
+      %img#item-icon.right.img-responsive{src: @item.icon_link, alt: @item.name}
+.row.card-balance
+  .col.l3.m6.s12
+    .card.orange.fill
       .card-content
-        - cache @item do
-          %span.card-title.center
-            = @item.name
-            = image_tag @item.icon_link, class: 'right img-responsive'
-          %b Buy price:
+        -# %span.card-title Price
+        .flow-text
+          %strong Buy:
           = @item.recommended_buy
-          (
-          = @item.buy_price
-          )
           %br
-          %b Sell price:
+          %strong Sell:
           = @item.recommended_sell
-          (
-          = @item.sell_price
-          )
-          %br
-          %b Margin:
+  .col.l3.m6.s12
+    .card.yellow.lighten-1.fill
+      .card-content
+        %span.card-title Margin
+        .flow-text
           = @item.margin
-          %br
-          %b ROI:
-          = @item.roi_raw
-          %br
-          %b Traded:
+  .col.l3.m6.s12
+    .card.light-green.fill
+      .card-content
+        %span.card-title Return on Investment
+        .flow-text
+          = @item.roi
+  .col.l3.m6.s12
+    .card.indigo.lighten-2.fill
+      .card-content
+        %span.card-title Amount Traded
+        .flow-text
           = @item.traded
-          %br
-          %b Last updated:
-        = @item.updated
-        .card-tabs
-          %ul.tabs.tabs-fixed-width
-            %li.tab
-              %a.active{href: '#month'} Month
-            %li.tab
-              %a{href: '#week'} Week
-            %li.tab
-              %a{href: '#three'} Three days
-            %li.tab
-              %a{href: '#daily'} Today
-        .card-content
-          #daily
-            = line_chart daily_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
-          #three
-            = line_chart three_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
-          #week
-            = line_chart week_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
-          #month
-            = line_chart month_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
-      - unless @item.timed_out?
-        .card-action
-          -# = link_to 'Refresh', refresh_path(@item.runescape_id)
-          %form{action: refresh_path(@item.runescape_id), method: 'post'}
-            -# %a.tooltipped{type: 'submit', 'data-position' => 'top', 'data-delay' => 50, 'data-tooltip' => 'ONLY PRESS ME IF THE GRAPH IS BROKEN!'} Refresh
-            %button#refresh-button.btn.waves-effect.waves-light.green.darken-2{type: 'submit', name: 'action', 'data-name' => @item.name} Refresh
+.row
+  .col.s12
+    .card
+      .card-tabs
+        %ul.tabs.tabs-fixed-width
+          %li.tab
+            %a.active{href: '#month'} Month
+          %li.tab
+            %a{href: '#week'} Week
+          %li.tab
+            %a{href: '#three'} Three days
+          %li.tab
+            %a{href: '#daily'} Today
+      .card-content
+        #daily
+          = line_chart daily_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
+        #three
+          = line_chart three_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
+        #week
+          = line_chart week_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true
+        #month
+          = line_chart month_path(@item.runescape_id), label: 'Price', height: '800px', min: nil, library: { pointSize: 0, trendlines: {'0' => {type: 'polynomial', degree: 2}}, curveType: 'none' }, legend: true

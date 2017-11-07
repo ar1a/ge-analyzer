@@ -21,7 +21,7 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def traded
-    h.number_to_human((buying_rate + selling_rate) / 2)
+    h.number_to_human((buying_rate + selling_rate) / 2, format: '%n%u', units: { thousand: 'K', million: 'M', billion: 'B' })
   end
 
   def roi

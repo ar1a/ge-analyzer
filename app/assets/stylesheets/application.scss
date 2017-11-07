@@ -59,3 +59,19 @@ a.collection-item.avatar img.circle {
     border-radius: 0%;
     // disable the circle drawing for items in the collection (index page)
 }
+
+
+.card-balance {
+    @media only screen and (min-width: 992px) {
+        display: flex;
+        flex-direciton: column;
+    }
+}
+
+.card.fill {
+    height: 100%;
+}
+
+h4 > #item-icon {
+    height: 2.28rem; 
+}
