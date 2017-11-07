@@ -85,7 +85,7 @@ class HomeController < ApplicationController
     when 'traded'
       items.sort { |x, y| (y.buying_rate + y.selling_rate) <=> (x.buying_rate + x.selling_rate) }
     when 'margin'
-      items.sort { |x, y| y.margin <=> x.margin }
+      items.sort { |x, y| y.margin.abs <=> x.margin.abs }
     else # traded_roi
       items.sort { |x, y| y.roi.to_f * (y.buying_rate + y.selling_rate) <=> x.roi.to_f * (x.buying_rate + y.selling_rate) }
     end
