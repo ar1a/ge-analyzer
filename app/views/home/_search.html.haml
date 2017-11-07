@@ -11,4 +11,4 @@
       %span.card-title Search
       = simple_form_for :item, url: items_search_path, method: :get do |f|
         .input-field
-          = f.input :name, required: false
+          = f.input :name, required: false, input_html: {value: params.dig('item', 'name')}
