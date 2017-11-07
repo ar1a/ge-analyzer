@@ -34,7 +34,7 @@
     %meta{:content => "#ffffff", :name => "theme-color"}/
   %body
     - flash.each do |type, message|
-      = javascript_tag "Materialize.toast('#{message}', 4000)"
+      = javascript_tag "$(document).on('ready', function(){Materialize.toast('#{message}', 4000)})"
     %nav.green.darken-2
       .nav-wrapper
         %a.brand-logo.center{:href => root_path} Jamflex Prices 💰
