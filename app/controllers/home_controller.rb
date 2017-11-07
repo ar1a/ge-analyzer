@@ -24,6 +24,9 @@ class HomeController < ApplicationController
     sort_decorate_render_groups
   end
 
+  def sitemap
+  end
+
   def top_flips
     @items = Item.top_flips.to_a
     @items = ItemDecorator.decorate_collection(@items)

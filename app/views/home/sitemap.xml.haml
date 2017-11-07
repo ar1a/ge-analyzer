@@ -1,0 +1,17 @@
+!!! XML
+%urlset{:xmlns => "http://www.sitemaps.org/schemas/sitemap/0.9"}
+  - for item in Item.all
+    %url
+      %loc= item_url(item)
+      %lastmod= item.updated_at.strftime('%Y-%m-%d')
+      %changefreq hourly
+      %priority 0.7
+  %url
+    %loc= root_url
+    %priority 1
+  %url
+    %loc= most_traded_url
+  %url
+    %loc= top_flips_url
+  %url
+    %loc= zulrah_url

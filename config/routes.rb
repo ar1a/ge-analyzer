@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   end
   # end
   # root 'welcome#index'
+  get 'sitemap', to: 'home#sitemap'
 
   devise_for :users, controllers: { registrations: 'registrations' }
 end
