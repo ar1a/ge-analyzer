@@ -129,7 +129,6 @@ GEM
     faraday (0.13.1)
       multipart-post (>= 1.2, < 3)
     ffi (1.9.18)
-    flamegraph (0.9.5)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
     haml (5.0.4)
@@ -170,7 +169,6 @@ GEM
       mime-types (>= 1.16, < 4)
     materialize-sass (0.100.2)
       sass (~> 3.3)
-    memory_profiler (0.9.8)
     method_source (0.9.0)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -286,7 +284,6 @@ GEM
     sshkit (1.14.0)
       net-scp (>= 1.1.2)
       net-ssh (>= 2.8.0)
-    stackprof (0.2.10)
     storext (2.2.2)
       rails (>= 4.0, < 6.0)
       virtus
@@ -348,7 +345,6 @@ DEPENDENCIES
   devise (~> 4.3)
   draper
   faraday
-  flamegraph
   haml (~> 5.0, >= 5.0.3)
   haml-rails (~> 1.0)
   httpclient
@@ -356,7 +352,6 @@ DEPENDENCIES
   jquery-rails (~> 4.3, >= 4.3.1)
   listen (>= 3.0.5, < 3.2)
   materialize-sass (~> 0.100.2)
-  memory_profiler
   parallel
   pg
   pry-rails
@@ -374,7 +369,6 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   sqlite3
-  stackprof
   storext
   traceroute
   turbolinks (~> 5)
