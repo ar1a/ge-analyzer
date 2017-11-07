@@ -2,7 +2,7 @@ class ItemDecorator < ApplicationDecorator
   delegate_all
 
   def margin
-    return '- gp' unless valid?
+    return '0 gp' unless valid?
     format_gp(object.margin.abs)
   end
 
@@ -54,6 +54,6 @@ class ItemDecorator < ApplicationDecorator
 
   def margin_style
     return 'red-text' if object.roi.nil?
-    object.roi.round(4) > 0 ? 'green-text' : 'red-text'
+    object.margin > 0 ? 'green-text' : 'red-text'
   end
 end

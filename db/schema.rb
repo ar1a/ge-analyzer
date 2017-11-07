@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171020055159) do
+ActiveRecord::Schema.define(version: 20171107090207) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,8 +28,10 @@ ActiveRecord::Schema.define(version: 20171020055159) do
     t.decimal "recommended_buy_price"
     t.decimal "recommended_sell_price"
     t.integer "margin"
+    t.boolean "members", default: true
     t.index ["buying_rate"], name: "index_items_on_buying_rate"
     t.index ["margin"], name: "index_items_on_margin"
+    t.index ["members"], name: "index_items_on_members"
     t.index ["name"], name: "index_items_on_name"
     t.index ["recommended_buy_price"], name: "index_items_on_recommended_buy_price"
     t.index ["recommended_sell_price"], name: "index_items_on_recommended_sell_price"

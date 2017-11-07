@@ -23,6 +23,10 @@ class Item < ApplicationRecord
       .limit(100)
   }
 
+  scope :free, lambda {
+    where('members = FALSE')
+  }
+
   scope :food, lambda {
     where(name: [
             'Shrimp',

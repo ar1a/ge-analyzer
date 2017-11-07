@@ -17,6 +17,7 @@ Rails.application.routes.draw do
     get 'potions', to: 'home#potions', as: 'potions'
     get 'ores', to: 'home#ores', as: 'ores'
     get 'food', to: 'home#food', as: 'food'
+    get 'free', to: 'home#free', as: 'free'
   end
   # end
   # root 'welcome#index'

@@ -5,8 +5,8 @@
     %small= preview.price
     %small.right.grey-text.text-darken-2 Traded: #{preview.traded}
   %p{class: "#{preview.margin_style}"}
-    .chip.green-text
+    .chip{ class: preview.margin_style }
       +
       = preview.margin
-    .chip.green-text
+    .chip{ class: preview.margin_style }
       = preview.roi

@@ -60,6 +60,11 @@ class HomeController < ApplicationController
     sort_decorate_render_groups
   end
 
+  def free
+    @items = Item.free.to_a
+    sort_decorate_render_groups
+  end
+
   def sort_by
     return redirect_to root_path, notice: 'You must be signed in to do this!' unless user_signed_in?
     current_user.update(sorting_method: params[:method])
