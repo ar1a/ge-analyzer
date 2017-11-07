@@ -17,7 +17,7 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def valid?
-    object.margin.abs != object.price.abs && object.margin != 0
+    object.margin.abs != object.recommended_sell_price.abs && object.margin != 0
   end
 
   def traded
