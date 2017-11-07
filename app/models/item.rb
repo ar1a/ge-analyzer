@@ -411,7 +411,12 @@ class Item < ApplicationRecord
     # If the first entry is new-ish, retry the get
     # The rsbuddy api only seems to return it for the past week or so sometimes
 
-    delta = (DateTime.now - DateTime.strptime(data[1]['ts'].to_s, '%Q'))
+    data = if data.size > 1
+             data[1]
+           else
+             data[0]
+           end
+    delta = (DateTime.now - DateTime.strptime(data['ts'].to_s, '%Q'))
     puts 11_111
     if delta < 25
       puts delta.to_i

@@ -1,27 +1,12 @@
-%li
-  .collapsible-header
-    = image_tag preview.icon_link, class: 'left img-responsive'
-    %b= preview.name
-    &nbsp;
-    = preview.price
-    %span{class: "badge margin #{preview.margin_style}"}
+%a.collection-item.avatar{href: item_path(preview.runescape_id)}
+  = image_tag preview.icon_link, class: 'circle', alt: preview.name
+  %span.title.black-text
+    = preview.name
+    %small= preview.price
+    %small.right.grey-text.text-darken-2 Traded: #{preview.traded}
+  %p{class: "#{preview.margin_style}"}
+    .chip.green-text
+      +
       = preview.margin
+    .chip.green-text
       = preview.roi
-
-  .collapsible-body
-    %span
-      %b Buy price:
-      = preview.recommended_buy
-      %br
-      %b Sell price:
-      = preview.recommended_sell
-      %br
-      %b Margin:
-      = preview.margin
-      %br
-      %b Traded:
-      = preview.traded
-      %br
-      %a.btn.waves-effect.waves-light.green.darken-2{href: item_path(preview.runescape_id)}
-        %i.material-icons.right send
-        View Item

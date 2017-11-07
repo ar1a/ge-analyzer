@@ -27,12 +27,12 @@
           - else
             Items
           %span.right
-            %a.dropdown-btn.btn.green.darken-2{href: '#', 'data-activates' => 'group-dropdown'}
+            %a.dropdown-btn.btn.green{href: '#', 'data-activates' => 'group-dropdown'}
               Groups
               %i.material-icons.right arrow_drop_down
-            = link_to 'Refresh', '', class: 'btn green darken-2'
+            = link_to 'Refresh', '', class: 'btn green'
         %br
-        %ul.collapsible.popout{'data-collapsible': 'accordion'}
+        %ul.collection
           - if @items.empty?
             Sorry, nothing found :(
           - else

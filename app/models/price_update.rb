@@ -23,7 +23,7 @@ class PriceUpdate < ApplicationRecord
     Timeout.timeout(40 * 60) do
       clnt = HTTPClient.new
       # Item.all.each do |i|
-      Parallel.each Item.all do |i|
+      Parallel.each Item.all, in_threads: Parallel.processor_count, progress: 'Updating price updates' do |i|
         begin
           puts "Worker: #{Parallel.worker_number}"
           thing = JSON.parse clnt.get_content("https://api.rsbuddy.com/grandExchange?a=guidePrice&i=#{i.runescape_id}")
@@ -35,7 +35,7 @@ class PriceUpdate < ApplicationRecord
           end
           update.overall_average = thing['overall'].to_i
           update.roi = if update.buy_average <= 0
-                         0
+                         100
                        else
                          (update.sell_average.to_f - update.buy_average.to_f) / update.overall_average.to_f
                        end
