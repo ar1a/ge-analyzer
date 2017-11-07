@@ -462,7 +462,7 @@ class Item < ApplicationRecord
     thing.each do |i|
       i = i[1]
       item = Item.find_or_create_by(runescape_id: i['id'])
-      item.update(name: i['name'])
+      item.update(name: i['name'], members: i['members'])
     end
   end
 end
