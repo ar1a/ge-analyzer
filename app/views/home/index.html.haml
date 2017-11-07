@@ -49,6 +49,6 @@
         %br
         %ul.collection
           - if @items.empty?
-            Sorry, nothing found :(
+            %li.collection-item Sorry, nothing found :(
           - else
             = render partial: 'preview', collection: @items, cached: true
