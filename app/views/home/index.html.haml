@@ -27,7 +27,7 @@
     = link_to 'Traded and ROI', items_sort_by_path('traded_roi'), method: :put
 .row
   = render 'search'
-  - if Rails.env.production?
+  - if Rails.env.production? && false
     .col.s12
       %script{:async => "", :src => "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
       / Jamflex index
