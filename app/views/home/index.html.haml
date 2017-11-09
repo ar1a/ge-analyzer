@@ -27,6 +27,13 @@
     = link_to 'Traded and ROI', items_sort_by_path('traded_roi'), method: :put
 .row
   = render 'search'
+  - if Rails.env.production?
+    .col.s12
+      %script{:async => "", :src => "//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"}
+      / Jamflex index
+      %ins.adsbygoogle{"data-ad-client" => "ca-pub-4624555430301411", "data-ad-format" => "auto", "data-ad-slot" => "6118776983", :style => "display:block"}
+      :javascript
+        (adsbygoogle = window.adsbygoogle || []).push({});
   .col.s12
     .card
       .card-content
