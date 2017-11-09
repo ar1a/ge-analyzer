@@ -13,6 +13,9 @@ class User < ApplicationRecord
 
   attr_accessor :login
 
+  has_many :favourites
+  has_many :favourite_items, through: :favourites, source: :item
+
   validates :username,
             presence: true,
             uniqueness: {
@@ -34,6 +37,17 @@ class User < ApplicationRecord
     end
   end
 
+  def favourite(item)
+    favourite_items << item
+  end
+
+  def unfavourite(item)
+    favourite_items.delete(item)
+  end
+
+  def favourited?(item)
+    favourite_items.include?(item)
+  end
   private
 
   def remove_blank_username

@@ -1,5 +1,7 @@
 class Item < ApplicationRecord
   has_many :price_updates
+  has_many :favourites
+  has_many :users, through: :favourites
 
   searchkick word_start: [:name]
 

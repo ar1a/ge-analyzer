@@ -20,6 +20,16 @@ class ItemsController < ApplicationController
     render json: @item.price_history(30)
   end
 
+  def favourite
+    return head :unauthorized unless user_signed_in?
+    if current_user.favourited? @item
+      current_user.unfavourite @item
+      head :ok
+    else
+      current_user.favourite @item
+      head :created
+    end
+  end
 
   def refresh
     a = @item.get_past_month

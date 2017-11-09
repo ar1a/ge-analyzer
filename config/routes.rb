@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post 'items/:id/refresh', to: 'items#refresh', as: 'refresh'
   get 'items/search', to: 'home#search', as: 'items_search'
   put 'items/sort_by/:method', to: 'home#sort_by', as: 'items_sort_by'
+  put 'items/:id/favourite', to: 'items#favourite', as: 'favourite'
   resources :items, only: %i[show]
   scope :groups do
     get 'most_traded', to: 'home#most_traded', as: 'most_traded'
@@ -18,6 +19,7 @@ Rails.application.routes.draw do
     get 'ores', to: 'home#ores', as: 'ores'
     get 'food', to: 'home#food', as: 'food'
     get 'free', to: 'home#free', as: 'free'
+    get 'favourited', to: 'home#favourited', as: 'favourited'
   end
   # end
   # root 'welcome#index'

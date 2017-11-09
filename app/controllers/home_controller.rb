@@ -71,6 +71,12 @@ class HomeController < ApplicationController
     sort_decorate_render_groups
   end
 
+  def favourited
+    return redirect_back fallback_location: root_path, notice: 'You must be signed in!' unless user_signed_in?
+    @items = current_user.favourite_items.to_a
+    sort_decorate_render_groups
+  end
+
   def sort_by
     return redirect_to root_path, notice: 'You must be signed in to do this!' unless user_signed_in?
     current_user.update(sorting_method: params[:method])

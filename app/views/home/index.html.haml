@@ -1,8 +1,11 @@
 %ul#group-dropdown.dropdown-content
   %li
-    = link_to 'Most traded', most_traded_path
-  %li
     = link_to 'Top flips', top_flips_path
+  %li
+    = link_to 'Most traded', most_traded_path
+  - if user_signed_in?
+    %li
+      = link_to 'Favourites', favourited_path
   %li.divider
   %li
     = link_to 'Barrows Items', barrows_items_path

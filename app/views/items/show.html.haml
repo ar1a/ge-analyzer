@@ -3,7 +3,15 @@
   .col.s12
     %h4#item-title{title: "Last updated #{@item.updated}"}
       = @item.name
-      %img#item-icon.right.img-responsive{src: @item.icon_link, alt: @item.name}
+      .right
+        %img#item-icon.img-responsive{src: @item.icon_link, alt: @item.name}
+        - if user_signed_in?
+          %a#favourite-link.waves-effect{href: '#', 'data-id' => @item.runescape_id}
+            %i.material-icons.small
+              - if current_user.favourited? @item
+                favorite
+              - else
+                favorite_border
 .row.card-balance
   .col.l3.m6.s12
     .card.orange.fill
