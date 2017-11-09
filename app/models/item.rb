@@ -342,7 +342,7 @@ class Item < ApplicationRecord
     update(roi: roi)
   rescue => e
     logger.debug e
-    logger.info "Item: #{name} roi failed, resorting to most recent price roi. Margin: #{margin.abs}, Buy: #{recmomended_buy_price}"
+    logger.info "Item: #{name} roi failed, resorting to most recent price roi. Margin: #{margin.abs}, Buy: #{recommended_buy_price}"
     update(roi: other)
   end
 
