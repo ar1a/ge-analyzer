@@ -9,6 +9,7 @@
         = @item.name
     = csrf_meta_tags
     %meta{:content => "width=device-width, initial-scale=1", :name => "viewport"}/
+    %meta{name: 'turbolinks-cache-control', content: 'no-preview'}
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload', async: Rails.env.production?
     = javascript_include_tag 'https://www.gstatic.com/charts/loader.js', async: Rails.env.production?
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload', async: Rails.env.production?
