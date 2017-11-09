@@ -10,7 +10,7 @@ $(document).on 'turbolinks:load', ->
       type: 'PUT'
       beforeSend: (xhr) ->
         xhr.setRequestHeader 'X-CSRF-TOKEN', $('meta[name="csrf-token"]').attr('content')
-      url: '/items/' + $(this).data('id') + '/favourite'
+      url: $(this).data('url')
       dataType: 'script'
       success: (_, __, xhr) ->
         if xhr.status == 200

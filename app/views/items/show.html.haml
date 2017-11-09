@@ -6,7 +6,7 @@
       .right
         %img#item-icon.img-responsive{src: @item.icon_link, alt: @item.name}
         - if user_signed_in?
-          %a#favourite-link.waves-effect{href: '#', 'data-id' => @item.runescape_id}
+          %a#favourite-link.waves-effect{href: '#', 'data-url' => favourite_path}
             %i.material-icons.small
               - if current_user.favourited? @item
                 favorite
