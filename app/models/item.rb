@@ -401,8 +401,8 @@ class Item < ApplicationRecord
     if sell_ema > 0 && buy_ema > 0
       if buy_ema > sell_ema
         buy_ema, sell_ema = sell_ema, buy_ema
-        update(recommended_buy_price: buy_ema, recommended_sell_price: sell_ema)
       end
+      update(recommended_buy_price: buy_ema, recommended_sell_price: sell_ema)
     end
   end
 
