@@ -14,7 +14,7 @@
                 favorite_border
 .row.card-balance
   .col.l3.m6.s12
-    .card.orange.fill
+    .card.fill
       .card-content
         -# %span.card-title Price
         .flow-text
@@ -24,19 +24,19 @@
           Sell:
           %span{ title: @item.sell_price }= @item.recommended_sell
   .col.l3.m6.s12
-    .card.yellow.lighten-1.fill
+    .card.lighten-1.fill
       .card-content
         %span.card-title Margin
         .flow-text
           = @item.margin
   .col.l3.m6.s12
-    .card.light-green.fill
+    .card.fill
       .card-content
         %span.card-title Return on Investment
         .flow-text
           = @item.roi
   .col.l3.m6.s12
-    .card.indigo.lighten-2.fill
+    .card.fill
       .card-content
         %span.card-title Amount Traded
         .flow-text
