@@ -40,7 +40,7 @@
   %body
     - flash.each do |type, message|
       = javascript_tag "$(document).on('ready', function(){Materialize.toast('#{message}', 4000)})"
-    %nav.green.darken-2
+    %nav.grey.darken-4
       .nav-wrapper
         %a.brand-logo.center{:href => root_path} Jamflex Prices 💰
         %a.button-collapse{"data-activates" => "mobilenav", :href => "#"}

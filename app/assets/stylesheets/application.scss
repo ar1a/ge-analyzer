@@ -29,6 +29,10 @@ body {
     border-color: #424242 !important;
 }
 
+.btn-flat {
+    @extend .grey-text, .text-lighten-2;
+}
+
 
 // navbar
 
