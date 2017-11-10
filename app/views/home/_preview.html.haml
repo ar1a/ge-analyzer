@@ -1,9 +1,9 @@
 %a.collection-item.avatar{href: item_path(preview.runescape_id)}
   = image_tag preview.icon_link, class: 'circle', alt: preview.name
-  %span.title.black-text
+  %span.title.white-text
     = preview.name
     %small= preview.recommended_buy
-    %small.right.grey-text.text-darken-2 Traded: #{preview.traded}
+    %small.right.grey-text.text-lighten-2 Traded: #{preview.traded}
   %p{class: "#{preview.margin_style}"}
     .chip{ class: preview.margin_style }
       +

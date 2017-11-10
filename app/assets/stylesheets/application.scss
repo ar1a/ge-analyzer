@@ -20,8 +20,15 @@
 
 body {
     /* background-color: #eeeeee; */
-    @extend .grey, .lighten-5;
+    background: #303030;
+    @extend .white-text;
 }
+
+.card, .tabs, .card-content > .collection > a, .collection {
+    background: #424242;
+    border-color: #424242 !important;
+}
+
 
 // navbar
 
