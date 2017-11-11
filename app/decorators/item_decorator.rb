@@ -53,6 +53,6 @@ class ItemDecorator < ApplicationDecorator
   end
 
   def margin_style
-    object.margin != 0 ? 'green-text' : 'red-text'
+    object.margin != 0 ? 'light-green-text text-lighten-1' : 'red-text'
   end
 end
