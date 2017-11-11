@@ -325,7 +325,7 @@ class Item < ApplicationRecord
         a.each do |b|
           tmp << [b[0], (b[1].map(&:overall_average).reduce(:+) / b[1].size.to_f).to_i]
         end
-        tmp.reject { |x| x[1].zero? }
+        tmp.map { |x| x[1].zero? ? [x[0], nil] : x }
       end
     end
   end
@@ -335,7 +335,7 @@ class Item < ApplicationRecord
       .where(
         created_at: (DateTime.current - day_range.days)..DateTime.current
       )
-      .pluck(:created_at, :overall_average).reject { |x| x[1].zero? }
+      .pluck(:created_at, :overall_average).map { |x| x[1].zero? ? [x[0], nil] : x }
   end
 
   def update_roi(other)
