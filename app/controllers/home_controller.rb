@@ -4,6 +4,10 @@ class HomeController < ApplicationController
     @items = @items.first(200) # limit it
     @items = sort_items_for_user(current_user, @items)
     @items = ItemDecorator.decorate_collection(@items)
+    respond_to do |format|
+      format.html
+      format.json { render json: @items }
+    end
   end
 
   def search
@@ -16,7 +20,10 @@ class HomeController < ApplicationController
     @items = @items.first 200
     @items = sort_items_for_user(current_user, @items)
     @items = ItemDecorator.decorate_collection @items
-    render 'index'
+    respond_to do |format|
+      format.html { render 'index' }
+      format.json { render json: @items }
+    end
   end
 
   def most_traded
@@ -38,7 +45,10 @@ class HomeController < ApplicationController
     @items = @items.reject { |x| x.runescape_id == 13190 } # Old school bond
     @items = sort_items_for_user(current_user, @items)
     @items = ItemDecorator.decorate_collection @items
-    render 'index'
+    respond_to do |format|
+      format.html { render 'index' }
+      format.json { render json: @items }
+    end
   end
 
   def barrows_items

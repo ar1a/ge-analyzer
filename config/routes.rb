@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   # authenticated :user do
   root 'home#index'
+  get 'items/home', to: 'home#index'
   get 'items/:id/daily', to: 'items#daily', as: 'daily'
   get 'items/:id/three', to: 'items#three', as: 'three'
   get 'items/:id/week', to: 'items#week', as: 'week'

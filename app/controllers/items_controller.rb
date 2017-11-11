@@ -2,6 +2,10 @@ class ItemsController < ApplicationController
   before_action :find_item
   def show
     @item = @item.decorate
+    respond_to do |format|
+      format.html
+      format.json { render json: @item }
+    end
   end
 
   def daily
