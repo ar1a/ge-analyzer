@@ -20,14 +20,14 @@ group :development, :test do
   gem 'sqlite3'
 end
 group :development do
+  gem 'bullet'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rack-mini-profiler', require: false
   gem 'rbtrace'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'web-console', '>= 3.3.0'
-  gem 'bullet'
-  gem 'rack-mini-profiler', require: false
   gem 'traceroute'
+  gem 'web-console', '>= 3.3.0'
 end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
@@ -44,6 +44,7 @@ gem 'httpclient'
 gem 'jquery-rails', '~> 4.3', '>= 4.3.1'
 gem 'materialize-sass', '~> 0.100.2'
 gem 'pry-rails'
+gem 'rack-cors', require: 'rack/cors'
 gem 'rbma'
 gem 'rest-client'
 gem 'ruby-progressbar'
