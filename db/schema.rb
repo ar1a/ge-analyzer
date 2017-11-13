@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171109080059) do
+ActiveRecord::Schema.define(version: 20171113044335) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,6 +48,12 @@ ActiveRecord::Schema.define(version: 20171109080059) do
     t.index ["roi"], name: "index_items_on_roi"
     t.index ["runescape_id"], name: "index_items_on_runescape_id"
     t.index ["selling_rate"], name: "index_items_on_selling_rate"
+  end
+
+  create_table "jwt_blacklist", force: :cascade do |t|
+    t.string "jti", null: false
+    t.datetime "exp", null: false
+    t.index ["jti"], name: "index_jwt_blacklist_on_jti"
   end
 
   create_table "price_updates", force: :cascade do |t|

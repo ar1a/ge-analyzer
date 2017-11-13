@@ -36,6 +36,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 gem 'basic-stats'
 gem 'chartkick'
 gem 'devise', '~> 4.3'
+gem 'devise-jwt'
 gem 'draper'
 gem 'faraday'
 gem 'haml', '~> 5.0', '>= 5.0.3'
