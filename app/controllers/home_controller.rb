@@ -37,7 +37,10 @@ class HomeController < ApplicationController
   def top_flips
     @items = Item.top_flips.to_a
     @items = ItemDecorator.decorate_collection(@items)
-    render 'index'
+    respond_to do |format|
+      format.html { render 'index' }
+      format.json { render json: @items }
+    end
   end
 
   def sort_decorate_render_groups
